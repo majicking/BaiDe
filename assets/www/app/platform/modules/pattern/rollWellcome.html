@@ -1,0 +1,167 @@
+<!--2018.4.24 zl-->
+<style>
+    .bar.bar-asser{
+        background: #1b82d2;
+        border-color:#1B82D2 !important;
+    }
+    .roll-title{
+        width: 100%;
+        padding:30px 0 10px;
+        background: #fff;
+        border-bottom: 0.5px solid #ddd;
+    }
+    .roll-icon{
+        font-size: 22px;
+        color: #15D6B1;
+        margin-right: 8px;
+    }
+    .roll-icon__s{
+        color: #15D6B1 !important;
+    }
+    .roll-smbox{
+        margin-bottom: 10px;
+        background: #fff;
+        padding: 10px 20px;
+        width: 100%;
+        border-bottom: 0.5px solid #ddd;
+    }
+    .roll-sm{
+        font-size: 14px;
+        color:#313131;
+    }
+    .roll-icon__time{
+        font-size: 18px;
+        color: #2A9AEC;
+        margin-left: 6px;
+    }
+    .roll-title__left{
+        margin-right: 10%;
+    }
+    .roll-title__right{
+        margin-left: 15%;
+    }
+    .roll-line{
+        width: 1px;
+        height: inherit;
+        background: #E8E8E8;
+    }
+    .roll-ti__sd{
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+    }
+    .roll-big{
+        font-size: 24px;
+        color: #313131;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .roll-bigR{
+        color: #E8541D;
+    }
+    .roll-icon__tim{
+        margin-left: 5px;
+    }
+    .roll-sm__line{
+        display: inline-block;
+        width: 1px;
+        height: 15px;
+        background: #E8E8E8;
+    }
+    .roll-good__info{
+        color: #999;
+        font-size: .75rem;
+    }
+
+    .detail{
+        padding: 0.3em;
+        margin-top: -0.925em;
+    }
+    .detail .panel{
+        width:100%;
+        background-color: #d6d9db;
+        border:1px solid #bebebe;
+        border-radius:0.23em;
+        /*border-bottom-left-radius:0.23em; */
+        font-size:0.8125em;
+        color:#464646;
+        height:2.384em;
+        line-height:2.384em;
+        text-align:center;
+        /*border-right:none;*/
+        font-family:"微软雅黑"
+    }
+    .detail-list{
+        padding: 0.5em 0;
+    }
+    .buy_rowel{
+        width: 80px;
+        height: 40px;
+        border: 0.5px solid #dddddd;
+        border-radius: 3px;
+        background: #0BA8F0;
+        display: block;
+        font-size: 0.75rem;
+        color: #ffffff;
+        margin: 0 auto;
+    }
+</style>
+<ion-header-bar id="s-header" class="bar-dblue" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="vm.goTowelcome('welcome')"></div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">存入</h1>
+</ion-header-bar>
+<ion-content class="bg-color">
+    <div class="list">
+        <div class="roll-main">
+            <div class="roll-title">
+                <div style="margin-bottom: 10px">
+                    <div class="floatLeft border_right pos-r" style="width: 50%;">
+                        <p class="roll-big roll-bigR">
+                            <span class="font-16 interest_span pos-r" style="bottom: 2px;color: #9F9F9F">约</span>
+                            <span class="interest_span">{{vm.model.split(":")[0]}}%</span>
+                        </p>
+                        <p class="roll-ti__sd">日算力<i class="icon ion-ios-information-outline roll-icon__time pos-r" style="top: 2px;"></i></p>
+                    </div>
+                    <div class="floatLeft" style="width: 50%">
+                        <p class="roll-big">{{vm.model.split(":")[1]}}</p>
+                        <p class="roll-ti__sd">算力期限</p>
+                    </div>
+                    <div class="clearFloat"></div>
+                </div>
+                <div class="padding-horizontal" style="padding: 5px 20% 0px 20%">
+                    <button class="button button-block button-dblue" ng-click="vm.welComeLoginGoNativeBackParams('pwdGesture')">存入</button>
+                </div>
+            </div>
+            <div class="f f-sb f-ac roll-smbox">
+                <span class="roll-sm f-ac roll-icon__s"><i class="icon ion-ios-bolt-outline roll-icon"></i>安全保障</span>
+                <span class="roll-sm__line"></span>
+                <span class="roll-sm">{{ vm.productType}}</span>
+                <span class="roll-sm__line"></span>
+                <span class="roll-sm">{{vm.model.split(":")[2] | number:0}}个起存</span>
+            </div>
+        </div>
+    </div>
+    <div class="detail" style="padding: 23px 10px 0; background: #ffffff">
+        <div class="panel">存入记录</div>
+        <div class="detail-list">
+            <table class="buyListBox" style="border: none">
+                <thead >
+                <tr>
+                    <td>存入用户</td>
+                    <td>存入数量（*个）</td>
+                    <td>存入时间</td>
+                </tr>
+                </thead>
+                <tbody  ng-repeat='item in vm.items'>
+                <tr style="border-bottom: 0.5px solid #dddddd">
+                    <td style="font-size: 0.625rem">{{item.userAccount}}</td>
+                    <!--<td style="font-size: 0.625rem">{{item.amount}}个</td>-->
+                    <td style="font-size: 0.625rem">****</td>
+                    <td style="font-size: 0.625rem">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="3%"> </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,105 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="vm.goBack()">
+    <!--<div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="vm.goBack()">-->
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}转账</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <div class="list">
+        <div class="item withdraw item-icon-right f f-fs " style="padding: 10px 15px 10px;" ng-click="vm.subAccountChanged(subAccountTypeText.value)" ng-repeat="subAccountTypeText in vm.model.subAccountTypeTextList">
+            <div class="mr-10" style="line-height: 42px;margin-top: 4px;">
+                <i class="iconfont font-25 {{subAccountTypeText.text.split(':')[1]}} {{subAccountTypeText.text.split(':')[2]}}"></i>
+            </div>
+            <div>
+                <label style="font-size: 16px">可用余额({{subAccountTypeText.text.split(':')[5]}})</label>
+                <div class="font-16" style="color: orange;">{{subAccountTypeText.text.split(':')[3]}}</div>
+            </div>
+            <i class="icon balanced" ng-class="{'ion-ios-circle-outline':vm.input.subAccountTypeOp!=subAccountTypeText.value,'ion-ios-checkmark-outline':vm.input.subAccountTypeOp==subAccountTypeText.value}" ng-if="vm.transferType == vm.subAccountType"></i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal;">转出账号</span>
+            <input type="text"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.toUsername"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入转出账号"
+                   ng-change="vm.moneyChanged()"
+                   >
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px" ng-click="vm.input.toUsername='';vm.moneyChanged()"></i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal;">转账额度</span>
+            <input type="number"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.money"
+                   ng-change="vm.moneyChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="操作最低数量{{vm.model.transferLimit|number:2}}"
+                   ng-if="vm.model.transferLimit != null&&vm.model.transferLimit != 0">
+            <input type="number"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.money"
+                   ng-change="vm.moneyChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="操作最低数量50.00"
+                   ng-if="vm.model.transferLimit == null||vm.model.transferLimit == 0">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px" ng-click="vm.input.money=null;vm.moneyChanged()"></i>
+            <div class="item-note-dblue font-14" style="position:absolute;padding-top: 7px;right: 16px" ng-click="vm.allEntry()">有效额度</div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal;">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   maxlength="22"
+                   ng-model="vm.input.payPassword"
+                   ng-change="vm.moneyChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px" ng-click="vm.input.payPassword='';vm.moneyChanged()"></i>
+        </div>
+    </div>
+    <div style="text-align: left; margin-left: 10px; margin-top: 10px;font-size: 13px;color: #96ABBB;" ng-show="vm.model.transferCount != null&&vm.model.transferCount != 0">
+        每天转账操作不得大于 {{vm.model.transferCount}} 次
+    </div>
+    <div class="padding-horizontal">
+        <button class="button button-block {{vm.model.subAccountTypeText.split(':')[4].split(',')[3]}}" ng-disabled="vm.disabled" ng-click="vm.confirm()">
+            确认转账
+        </button>
+        <!--{{vm.model.subAccountTypeText.split(':')[0]}}-->
+    </div>
+</ion-content>

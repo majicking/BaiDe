@@ -1,0 +1,131 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}"
+                cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;"
+         ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(':')[3], {subAccountType:vm.subAccountType})">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">竞价详情</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear"
+                ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(':')[3], {subAccountType:vm.subAccountType})">
+                <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}}"
+                   style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">账&nbsp;&nbsp;&nbsp;&nbsp;户</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="content-detail">
+        <ul class="list tempporAccList">
+            <!--<li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无竞价</li>-->
+            <li id="{{ vm.biddingParData.id }}" style="box-shadow: none;border: none;padding: 0 15px;margin: 0">
+                <div class="bidding_odd_numbers f f-sb">
+                    <div>
+                        <span class="bidding_text_span">单号：</span>
+                        <span class="bidding_text_oddNumber">{{ vm.biddingParData.sn }}</span>
+                    </div>
+                    <span class="bidding_text_Time">{{ vm.biddingParData.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+                </div>
+
+                <div class="count-down--main" style="margin-top: 30px;">
+                    <div class="DownTimeDiv f f-c count_down {{vm.model.subAccountTypeText.split(':')[2]}} background-line"
+                         ng-if="vm.biddingParData.endTime != '2' && vm.biddingParData.endTime != '1'">
+                        <div class="f-ac">
+                            <div>倒计时：</div>
+                            <div ng-show="vm.biddingParData.endTime != '2' && item.endTime != '1'">
+                                <timer end-time="vm.biddingParData.endTime"
+                                       finish-callback="finished(vm.biddingParData.id)">{{ hours || '00' }}:{{ minutes
+                                    || '00' }}:{{ seconds || '00' }}:{{ millis | limitTo:-3 | limitTo:2 }}
+                                </timer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="count-down--{{ item.id }}" style="display: none;">
+                    <div class="f f-c f-ac count_down count-down--end">
+                        <div class="f f-c f-ac">竞价已结束</div>
+                    </div>
+                </div>
+                <div ng-if="item.endTime == '2' && item.endTime != '1'">
+                    <div class="f f-c f-ac count_down"
+                         ng-class="{ 'count-down--end': item.endTime == '2'|| vm.endTime == 2}">
+                        <div class="f f-c f-ac">竞价已结束</div>
+                    </div>
+                </div>
+                <div class="biddingList_content" style="padding-bottom: 0">
+                    <div class="f f-c mb-10">
+                        <div class="b-r width50">
+                            <p class="bidding_designation f-c">数量</p>
+                            <p class="bidding_price f-c webFont">{{ vm.biddingParData.sellAmount }}</p>
+                        </div>
+                        <div class="width50">
+                            <p class="bidding_designation f-c" ng-if="vm.typeOtc==0 && vm.typeOtc!=1">当前最高价格</p>
+                            <p class="bidding_designation f-c" ng-if="vm.typeOtc==1 && vm.typeOtc!=0">当前最低价格</p>
+                            <p class="bidding_price f-c webFont">{{ vm.biddingParData.realprice | number: 2 }}</p>
+                        </div>
+                    </div>
+                    <div class="f f-c">
+                        <input class="binning_numInput" type="number"
+                               placeholder="请输入竞价单价"
+                               style="width: 80%"
+                               ng-keyup="writeClear($event, 'write')"
+                               ng-focus="writeClear($event, 'write')"
+                               ng-blur="writeBlur($event, 'write')"
+                               ng-model="vm.biddingNumber">
+                    </div>
+                    <div class="f f-c">
+                        <button class="btn_bidding button button-block {{vm.model.subAccountTypeText.split(':')[2]}} background-line"
+                                ng-click="vm.reminder();" style="color: #ffffff">确认竞价
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="particularsList">
+            <!--<li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无记录</li>-->
+            <li class="f f-sb">
+                <div class="particularsList_name" style="color: #8C8C8C">{{ vm.biddingParData.map.truename }}</div>
+                <div class="particularsList_number">
+                    <span class="font-16" style="color: #8C8C8C">出价:</span>
+                    <span class="font-20" style="color: #1b82d2">{{ vm.biddingParData.map.uniprice | number: 2}}</span>
+                </div>
+            </li>
+            <li class="f f-sb" ng-repeat='biddingPele in vm.items'>
+                <div class="particularsList_name" style="color: #8C8C8C">{{ biddingPele.truename.charAt(0) + '**' }}
+                </div>
+                <div class="particularsList_number">
+                    <span class="font-16" style="color: #8C8C8C">出价:</span>
+                    <span class="font-20" style="color: #1b82d2">{{ biddingPele.uniprice | number: 2}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines"
+                         distance="1%"></ion-infinite-scroll>
+</ion-content>

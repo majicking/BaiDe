@@ -1,0 +1,19 @@
+<ion-view hide-tabs="true" view-title="支付订单" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ui-sref="tab.manage-order">返回</button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="list">
+            <div class="item item-icon-right">
+                <label class="font-15" style="color: #000;font-size: 18px;position: relative;top: -1px;">推广会员费</label>
+                <div class="item-note" style="font-weight: bold;color: #000;font-size: 18px;">1000.00元</div>
+                <i class="icon ion-checkmark-circled icon-accessory" style="color: #0dc300;font-size: 25px;"></i>
+            </div>
+        </div>
+        <div class="padding-horizontal">
+            <button class="button button-block button-energized" ng-click="vm.confirm()">确认支付￥1000.00</button>
+        </div>
+    </ion-content>
+</ion-view>

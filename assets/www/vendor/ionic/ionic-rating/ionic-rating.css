@@ -1,0 +1,26 @@
+.rating:before {
+    content: "\e621";
+}
+
+.rating {
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+    color: #ccc
+}
+
+.rating span {
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #FF9900;
+    white-space: nowrap
+}
+
+.rating-label {
+    margin-left: 5px;
+    color: #FF9900;
+    font-size: 13px;
+}

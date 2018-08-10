@@ -1,0 +1,67 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-icon-sm button-clear" style="left: 2px;font-size: 15px" ng-if="vm.back=='account'" ng-click="goNativeBackParams(vm.fromState, {tradeType:vm.model.tradeType, subAccountType:vm.subAccountType})">完成</div>
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;font-size: 15px" ng-if="vm.back=='list'" ng-click="goNativeBack({{vm.toState}})"></div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">结果详情</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <div class="item item-body" ng-show="vm.showPage">
+        <div class="cd-container cd-timeline">
+            <div ng-class="{'cd-timeline-result1-rollin':vm.model.state=='00','cd-timeline-result2':(vm.model.state=='01'&&vm.pattern=='1')||(vm.model.state=='02'&&vm.pattern=='0')}">
+                <div class="cd-timeline-block">
+                    <div class="cd-timeline-icon cd-info-blue">
+                        <i class="icon ion-checkmark-round"></i>
+                    </div>
+                    <div class="cd-timeline-content">
+                        <div class="cd-title cd-info-blue">{{vm.pattern == '0'?'转出':'存入'}}
+                            {{vm.model.tradeType == '01'?'临时节点(永久)'
+                            :vm.model.tradeType == '02'?'固定节点(1个月)'
+                            :vm.model.tradeType == '03'?'固定节点(3个月)'
+                            :vm.model.tradeType == '04'?'固定节点(6个月)'
+                            :vm.model.tradeType == '05'?'固定节点(12个月)'
+                            :''}}</div>
+                        <span class="cd-date" style="display: block;float: none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{vm.pattern == '0'?'转出':'存入'}}数量:{{vm.model.amount}}</span>
+                        <span class="cd-date">{{vm.model.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    </div>
+                </div>
+                <!--<div ng-class="{'cd-timeline-result4':vm.model.state=='03'}"></div>-->
+                <div class="cd-timeline-block">
+                    <div class="cd-timeline-icon" ng-class="{'cd-warning':vm.model.state=='00','cd-info-blue':(vm.model.state=='01'&&vm.pattern=='1')||(vm.model.state=='02'&&vm.pattern=='0')}">
+                        <i class="icon" ng-class="{'iconfont icon-time font-22':vm.model.state=='00','iconfont icon-icon_rotate font-22':(vm.model.state=='01'&&vm.pattern=='1')||(vm.model.state=='02'&&vm.pattern=='0')}"></i>
+                    </div>
+                    <div class="cd-timeline-content">
+                        <!--<div class="cd-title cd-info-blue" ng-if="vm.model.state=='02'">兑换成功</div>-->
+                        <!--<div class="cd-title cd-error" ng-if="vm.model.state=='03'">兑换失败</div>-->
+                        <div class="cd-title" ng-if="vm.model.state=='00'&&vm.pattern=='1'" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">算力开始时间</div>
+                        <div class="cd-title" ng-if="vm.model.state=='02'&&vm.pattern=='0'" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">算力结束时间</div>
+                        <span class="cd-date" ng-if="vm.pattern == '1'">{{vm.model.startTime | date:'yyyy-MM-dd'}}</span>
+                        <span class="cd-date" ng-if="vm.pattern == '0'">{{vm.model.createTime | date:'yyyy-MM-dd'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

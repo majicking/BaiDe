@@ -1,0 +1,145 @@
+<ion-header-bar class="bar-dgreen" cache-view="false">
+    <!--<div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-if="vm.model.userType=='0'" ng-click="goNativeBack('tab.account-qrcode')"></div>-->
+    <div class="button button-clear" style="position: absolute;left:10px;top:8px" ng-if="vm.model.userType=='0'||vm.model.grade.split(':')[0]=='21'" ng-click="goNativeBack('tab.account-qrcode')">
+        <i class="iconfont icon-erweima1" style="color: #fff;font-size: 28px;"></i>
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal;"></h1>
+    <div class="button button-clear" style="position: absolute;right:6px;" ng-click="vm.scanner()">
+        <i class="icon iconfont icon-dvt-saoys" style="color: #fff;font-size: 30px;"></i>
+    </div>
+</ion-header-bar>
+<ion-content class="bg-color">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-d">
+    </ion-refresher>
+    <div class="my-header">
+
+        <div class="waveWrapper waveAnimation">
+            <div class="waveWrapperInner bgTop">
+                <div class="wave waveTop" style="background-image: url('app/platform/resources/img/account/wave-top.png')"></div>
+            </div>
+            <div class="waveWrapperInner bgMiddle">
+                <div class="wave waveMiddle" style="background-image: url('app/platform/resources/img/account/wave-mid.png')"></div>
+            </div>
+            <div class="waveWrapperInner bgBottom">
+                <div class="wave waveBottom" style="background-image: url('app/platform/resources/img/account/wave-bot.png')"></div>
+            </div>
+        </div>
+
+        <div class="account-user">
+            <img ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif'}}" ng-click="showBigImage(vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif')">
+            <p class="verify" style="background-color:#c9cbca;" ng-if="vm.model.isTrustName==0" ui-sref="verify">
+                <i class="icon iconfont ion-ios-person" style="position: absolute;top: 7px;left: 10px;font-size: 11px"></i>
+                <span style="display: inline-block;font-size: 10.5px;padding: 0 3px 0 18px;">点击认证</span>
+            </p>
+            <p class="verify" ng-if="vm.model.isTrustName==1">
+                <i class="icon iconfont icon-shimingrenzheng" style="position: absolute;color:#cd4a06;top: 5px;left: 10px;font-size: 11px"></i>
+                <span style="display: block;color:#cd4a06;font-size: 10.5px;padding: 0 3px 0 18px;">实名用户</span>
+            </p>
+            <p class="name name_start">{{vm.model.name.charAt(0) + '**'}}</p>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-icon-left" style="border:none;padding-top: 10px; padding-bottom:10px;padding-left: 30px !important;">
+            <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color:#1b82d2;"></i>
+            <label class="font-16" style="position: relative;top: 0px;">用户类型</label>
+            <div class="item-note font-14">{{vm.model.grade.split(':')[1]}}</div>
+        </div>
+    </div>
+    <div class="item block" style="border-top:0.5px solid #DDDDDD;padding-bottom: 5px">
+        <div class="grid-item-25 text-center mb-10" ng-class="otc-$index" ng-click="goNativeBackParams(subAccountType.text.split(':')[3], {subAccountType:subAccountType.value})" ng-repeat='subAccountType in vm.model.subAccountTypeListDisplay'>
+            <i class="iconfont {{subAccountType.text.split(':')[1]}} {{subAccountType.text.split(':')[2]}} font-25"></i>
+            <div class="fab-button-label font-12">{{subAccountType.text.split(':')[0]}}</div>
+        </div>
+        <div class="grid-item-25 text-center" ng-class="otc-$index" ng-click="vm.build()">
+            <i class="iconfont icon-ziyuan1 font-25" style="color: #A8A8A8;"></i>
+            <div class="fab-button-label font-12">更多</div>
+        </div>
+    </div>
+    <div class="item item-gap"></div>
+    <div class="item item-icon-left item-icon-right" style="border:none;padding-top: 10px; padding-bottom:10px;padding-left: 30px !important;">
+        <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>
+        <label class="font-16" style="position: relative;top: 0px;">最新动态</label>
+    </div>
+
+    <div class="list" style="border-top:0.5px solid #DDDDDD">
+        <div class="item item-sm text-center" ng-show="vm.model.lastAmountText==undefined">{{vm.model.resultText}}</div>
+        <!--<div class="item item-avatar-left" ng-show="vm.model.lastAmountText!=undefined" ng-click="goNativeBackParams('tab.account-payment-list', {subAccountType:vm.model.lastAmountText.split(':')[5], back:'account'})">-->
+        <div class="item item-avatar-left" ng-show="vm.model.lastAmountText!=undefined" ng-click="goNativeBackParams('tab.account-bills-list', {subAccountType:vm.model.lastAmountText.split(':')[5], back:'account'})">
+            <div class="acc_imgCentent">
+                <img ng-src="app/platform/resources/img/logoBaiDe.png" style="max-width: 50px;max-height: 50px;  border-radius: 0%;left: 20px;top:10px">
+            </div>
+            <div ng-class="{'bill-list-amount bill-list-amount-gold':vm.model.lastAmountText.split(':')[2]==0, 'bill-list-amount bill-list-amount-blue':vm.model.lastAmountText.split(':')[2]!=0}">{{vm.model.lastAmount}}</div>
+            <div class="bill-list-note" style="padding-right: 27%;width:73%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{vm.model.lastNote}}</div>
+            <div class="bill-list-right4">{{vm.model.lastExecuteTime}}</div>
+            <div class="bill-list-state1 {{vm.model.lastAmountText.split(':')[6]}}">{{vm.model.lastAccountName}}</div>
+            <i class="ion-chevron-right bill-list-right5"></i>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-gap"></div>
+        <div class="item item-icon-left item-icon-right" style="border:none;padding-top: 10px; padding-bottom:10px;padding-left: 30px !important;">
+            <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>
+            <label class="font-16" style="position: relative;top: 0px;">账户总览</label>
+            <i href="javascript:void(0);" ng-class="{'icon iconfont icon-kejian2 icon-accessory':vm.flag==true, 'icon iconfont icon-bukejian icon-accessory':vm.flag==false}"  style="font-size: 23px;right: 15px" ng-click="vm.display()"></i>
+        </div>
+        <div class="account-home" style="border-top:0.5px solid #DDDDDD;z-index: 999;position: relative;" ng-show="vm.flag==true">
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText1.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name1}}</span>
+                <span class="money-2 ">{{vm.model.amount1}}</span>
+                <span class="label-home">枚</span>
+            </div>
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText2.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name2}}</span>
+                <span class="money-2">{{vm.model.amount2}}</span>
+                <span class="label-home">枚</span>
+            </div>
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText3.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name3}}</span>
+                <span class="money-2">{{vm.model.amount3}}</span>
+                <span class="label-home">枚</span>
+            </div>
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText4.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name4}}</span>
+                <span class="money-2">{{vm.model.amount4}}</span>
+                <span class="label-home">枚</span>
+            </div>
+
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText5.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name5}}</span>
+                <span class="money-2">{{vm.model.amount5}}</span>
+                <span class="label-home">枚</span>
+            </div>
+
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText6.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name6}}</span>
+                <span class="money-2">{{vm.model.amount6}}</span>
+                <span class="label-home">枚</span>
+            </div>
+
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText7.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name7}}</span>
+                <span class="money-2">{{vm.model.amount7}}</span>
+                <span class="label-home">枚</span>
+            </div>
+
+            <div class="text-left pl85 mtb20">
+                <div class="label-coin {{vm.model.subAccountTypeAmountText8.split(':')[2]}} background-line"></div>
+                <span class="label-home justifySpan">{{vm.model.name8}}</span>
+                <span class="money-2">{{vm.model.amount8}}</span>
+                <span class="label-home">枚</span>
+            </div>
+            <p class="text-center label-home mtb30 hidden" style="margin-bottom: 15px;">-------光挣链不够，还得让链产链-------</p>
+        </div>
+    </div>
+</ion-content>
+<com-image-box></com-image-box>

@@ -1,0 +1,84 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(',')[4].split(':')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(',')[3], {subAccountType:vm.subAccountType})">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">转让(交易)</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(',')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(',')[3], {subAccountType:vm.subAccountType})">
+                <i class="iconfont {{vm.model.subAccountTypeText.split(',')[1]}}" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">账&nbsp;&nbsp;&nbsp;&nbsp;户</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(',')[4].split(':')[1]}}">
+    <div class="list">
+        <li class="item item-text-wrap" ng-if="vm.id != null" ng-click="goNativeBackParams('tab.account-ceded-list', {subAccountType:vm.subAccountType, id:vm.id})">
+            <div>
+                <div class="bill-list-label">{{vm.model.dateLabel}}</div>
+                <div class="bill-list-date">{{vm.model.date}}</div>
+                <div class="bill-list-amount bill-list-amount-gold">{{vm.model.amount|number:2}}</div>
+                <div class="bill-list-note">{{vm.model.note}}</div>
+                <div class="bill-list-state state-04">已选择</div>
+                <i class="ion-chevron-right bill-list-right"></i>
+            </div>
+        </li>
+        <div class="item withdraw" ng-if="vm.id == null"  ng-click="goNativeBackParams('tab.account-ceded-list', {subAccountType:vm.subAccountType})">
+            <label style="font-size: 16px">请选择转让股本对象</label>
+            <i class="ion-chevron-right bill-list-right1"></i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal">转让对方账号</span>
+            <input type="text"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.toUsername"
+                   ng-change="vm.usernameChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="转让对方百德账号">
+            <i class="icon ion-close-circled input-del-ceded" style="padding-top: 8px;" ng-click="vm.input.toUsername='';vm.usernameChanged()"></i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.payPassword"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-ceded" style="padding-top: 8px;" ng-click="vm.input.payPassword=''"></i>
+        </div>
+    </div>
+    <div class="padding" style="padding-bottom:0px; font-size: 12px;color: #96ABBB;">
+        申请股本转让后，会有客服人员与您联系，请保持电话通畅(请注意：处理完成前，该对象将不会每日释放)
+    </div>
+    <div class="padding-horizontal">
+        <button class="button button-block {{vm.model.subAccountTypeText.split(',')[4].split(':')[3]}}" ng-disabled="vm.disabled" ng-click="vm.confirm()">
+            确认申请
+        </button>
+    </div>
+</ion-content>

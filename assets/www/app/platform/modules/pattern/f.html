@@ -1,0 +1,90 @@
+<style>
+    .gesture_password_body{
+        width: 100%;
+        height: 100%;
+        padding-top: 300px;
+    }
+    .headPortrait{
+        margin-bottom:100px;
+    }
+    .headPortrait p{
+        font-size: 24px;
+        text-align: center;
+        margin: 0;
+        color: #9F9F9F;
+    }
+    .headPortrait_img_dv{
+        width: 220px;
+        height: 220px;
+        background: #0a9dc7;
+        border-radius: 100%;
+        margin: 0 auto 30px;
+    }
+    .gesture_centent{
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        background: #0fa4db;
+    }
+    .on-off_man{
+        width: 200px;
+        margin: 20px auto;
+        font-size: 20px;
+    }
+</style>
+<div class="gesture_password_body">
+    <div class="headPortrait">
+        <div class="headPortrait_img_dv"></div>
+        <p>HI!您好请输入手势密码</p>
+    </div>
+    <div class="gesture_centent">
+
+    </div>
+    <div class="on-off_man">
+        <span>隐藏轨迹</span>
+        <input type="checkbox" />
+    </div>
+</div>
+<!--
+<script>
+    $(function(){
+        $('#setting_used').find('label').attr('style','left:315px;top:5px;');
+        $('#setting_used').find('div').attr('style','margin-left:5px;');
+
+    });
+</script>
+
+<ion-view view-title="手势密码管理" hide-tabs="true" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.manage')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="item item-divider">
+            手势密码设置
+        </div>
+
+        <ion-toggle id="setting_used" class="padding" ng-model="vm.isUsedFlag"
+                    ng-change="vm.on_off_change()">
+            是否使用手势密码
+        </ion-toggle>
+
+        <div class="list" ng-show="vm.c_changePattern">
+            <a class="item item-icon-right" ng-click="vm.changePattern()">
+                {{vm.btn_change_msgs}}
+                <i class="icon ion-arrow-right-c"></i>
+            </a>
+        </div>
+
+        <div class="padding" style="font-size: 11px;color: orangered;" ng-show="vm.c_settingPassMsg">
+            提示：{{vm.setting_msgs[vm.setting_index]}}
+        </div>
+        <div class="padding" style="font-size: 11px;color: orangered;" ng-show="vm.c_srcPassMsg">
+            提示：请输入原密码
+        </div>
+        &lt;!&ndash; 手势密码 &ndash;&gt;
+        <div id='lockPattern' style="text-align: center" class='pattern-holder patt-holder' ng-show="vm.c_showPattern"></div>
+
+    </ion-content>
+</ion-view>-->

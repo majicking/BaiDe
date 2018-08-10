@@ -1,0 +1,13 @@
+@media screen and (min-width: 320px) {
+body { font-size: 16px; }
+}
+@media screen and (min-width: 480px) {
+body { font-size: 24px; }
+}
+
+@media screen and (min-width: 640px) {
+body { font-size: 32px; }
+}
+
+.c_grey{color: #8c8c8c;}
+.c_red{color: #eb5345;}

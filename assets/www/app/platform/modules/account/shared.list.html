@@ -1,0 +1,24 @@
+<ion-view view-title="利润分享" hide-tabs="true" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.account')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <ion-refresher on-refresh="vm.doRefresh()"
+                       pulling-text="下拉刷新"
+                       refreshing-text="刷新中..."
+                       refreshing-icon="ion-loading-b">
+        </ion-refresher>
+        <ui class="list account">
+            <li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无交易记录</li>
+            <li class="item item-text-wrap" ng-repeat='item in vm.items'>
+                <div class="bill-list-label">{{item.dateLabel}}</div>
+                <div class="bill-list-date">{{item.date}}</div>
+                <div class="bill-list-amount">{{item.cashAmount|number:2}}</div>
+                <div class="bill-list-note">{{item.note}}</div>
+            </li>
+        </ui>
+        <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="1%" ></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,72 @@
+<!--2018 4.18 zl-->
+<style>
+    [nav-view-transition="ios"][nav-view-direction="forward"] {
+        background: inherit !important;
+    }
+</style>
+<ion-view view-title="绑定手机" cache-view="false" class="register_title" style=" background: inherit!important;">
+    <div class="bar bar-header bar-dOrange top-trans f-ac f-sb">
+        <i class="icon iconfont icon-jiantou-left-copy" ng-click="goNativeBackParams('login', {loginType:'left'})" style="font-size: 25px;margin-left:10px;"></i>
+        <div class="f-fs">
+            <span>绑定手机</span>
+        </div>
+        <div class="visibility"><i class="icon iconfont icon-jiantou-left-copy" ng-click="goNativeBackParams('login', {loginType:'left'})" style="font-size: 25px;margin-left:10px;"></i></div>
+    </div>
+
+    <ion-content>
+        <div class="list register-list-inset margin_centent">
+            <!--验证码-->
+            <div class="input_border write">
+                <i class="icon iconfont icon-yanzhengma icon_calss colorOrange font-22"></i>
+                <input class="NO_bgcolor_input paddingLeft45 paddingRight100" type="text" placeholder="验证码"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       maxlength="4"
+                       ng-model="vm.code">
+                <img class="registerCodeImg" ng-src="{{vm.codeUrl}}" ng-click="vm.getCode()">
+                <button class="button button-dblue button-small" style="position: absolute;top: 8px;right: 16px;background: #fff;width: 0px;height: 0px"></button>
+                <i class="icon ion-close-circled input-del-register"
+                   style="top:4px; right: 125px;font-size: 15px;" ng-click="vm.code=''"></i>
+            </div>
+            <!--手机号-->
+            <div class="input_border write">
+                <i class="icon fa fa-mobile icon_calss colorOrange font-30" style="left: 20px;"></i>
+                <input class="NO_bgcolor_input paddingLeft45 paddingRight100" type="tel"  placeholder="手机号"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       maxlength="11"
+                       ng-model="vm.phone">
+                <button class="button button-dOrange button-small registerCodeButton"
+                        ng-click="vm.getCaptcha(true)"
+                        ng-disabled="vm.captchaBtn.disabled">{{vm.captchaBtn.label}}
+                </button>
+                <i class="icon ion-close-circled input-del-register"
+                   style="top:4px; right: 125px;font-size: 15px;" ng-click="vm.phone=''"></i>
+            </div>
+            <!--动态码-->
+            <div class="input_border margin0 write">
+                <i class="icon ion-ios-email icon_calss colorOrange font-22" style="left: 19px;"></i>
+                <input class="NO_bgcolor_input paddingLeft45" type="number" placeholder="动态码"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       maxlength="6"
+                       ng-model="vm.captcha">
+                <i class="icon ion-close-circled input-del-register posi_top"
+                   style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.captcha=''"></i>
+            </div>
+
+            <div class="padding font-12 colorOrangeRed">
+                我们将对您的个人信息进行保密，请您放心填写。
+            </div>
+            <div>
+                <button class="button button-dOrange buttonWell" ng-click="vm.saveEmploy()">
+                    保存并使用
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+

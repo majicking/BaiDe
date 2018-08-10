@@ -1,0 +1,66 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="bar-dblue" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBackParams('tab.market-listnb',{ subAccountType:vm.subAccountType })">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">市场详情</h1>
+    <div class="button button-clear f-ac visibility" style="position: absolute;right:10px;top:6px">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}}" style="color: #fff;font-size: 26px;"></i>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <div class="list">
+
+        <div class="item item-icon-left item-icon-right" ng-show="vm.input.createUser != vm.input.currentUser && vm.typeOtc == 1">
+            <i class="icon iconfont icon-ruhetigaodengjifen" style="font-size: 25px;color: #1b82d2;"></i>
+            <label class="font-17">可用NDL账户</label>
+            <i class="icon ion-chevron-right icon-accessory" style="width: 50px;padding-left: 18px;color: #fff">
+                <div class="item-note-price font-17">{{vm.model.consumeAccount|number:2}}</div>
+            </i>
+        </div>
+        <!--<div class="item withdraw item-icon-left" style="border: none" ng-click="vm.subAccountChanged(subAccountTypeText.value)" ng-repeat="subAccountTypeText in vm.model.subAccountTypeTextList" ng-show="vm.input.otcType=='1'&&vm.input.currentUser!=vm.input.createUser">
+            <i class="icon iconfont {{subAccountTypeText.text.split(':')[1]}} {{subAccountTypeText.text.split(':')[2]}}" style="font-size: 25px;"></i>
+            <label style="font-size: 16px">{{subAccountTypeText.text.split(':')[0]}}</label>
+            <div class="item-note-orange">{{subAccountTypeText.text.split(':')[3]}}</div>
+            &lt;!&ndash;<i class="icon balanced" ng-class="{'ion-ios-circle-outline':vm.input.subAccountTypeOp!=subAccountTypeText.value,'ion-ios-checkmark-outline':vm.input.subAccountTypeOp==subAccountTypeText.value}"></i>&ndash;&gt;
+        </div>-->
+        <div class="item-gap" ng-show="vm.input.createUser != vm.input.currentUser && vm.typeOtc == 1"></div>
+        <div class="item">
+            <label style="font-weight: normal;">单号</label>
+            <div class="item-note-grey">{{vm.input.sn}}</div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item f-sb">
+            <label style="font-weight: normal;">单价</label>
+            <div class="item-note-orange font-14">{{vm.input.sellOnePrice}}</div>
+        </div>
+        <div class="item f-sb">
+            <label style="font-weight: normal;">{{vm.pageContent.otcStr}}数量</label>
+            <div class="item-note-dblue">{{vm.input.sellAmount}}</div>
+        </div>
+
+        <div class="item f-sb">
+            <label>总价</label>
+            <div class="item-note-orange">{{vm.input.totalPrice}}</div>
+        </div>
+        <div class="item-gap" ng-show="vm.input.currentUser!=vm.input.createUser"></div>
+        <div class="item item-input item-stacked-label withdraw write" style="border: none" ng-show="vm.input.currentUser!=vm.input.createUser">
+            <span class="input-label withdraw font-14" style="font-weight: normal;">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   class="font-14"
+                   ng-model="vm.input.payPassword"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px" ng-click="vm.input.payPassword=''"></i>
+        </div>
+    </div>
+    <div style="text-align: left; margin-left: 10px; margin-top: 10px;font-size: 13px;color: #96ABBB;" ng-show="vm.input.tradeCount != null&&vm.input.tradeCount != 0">
+        每天买卖操作不得大于 {{vm.input.tradeCount}} 次
+    </div>
+    <div class="padding-horizontal" ng-show="vm.input.currentUser!=vm.input.createUser">
+        <button class="button button-block button-dblue" ng-click="vm.confirmBuy()" ng-disabled="vm.disabled">
+            确认{{vm.pageContent.btnStr}}
+        </button>
+    </div>
+</ion-content>

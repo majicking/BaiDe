@@ -1,0 +1,86 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}"
+                cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;"
+         ng-click="goNativeBack('tab.account')"></div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <ul>
+                <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                    <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                    <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+                </li>
+                <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                    <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                    <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+                </li>
+                <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                    <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                    <label style="font-size: 15px">邀请码</label>
+                </li>
+                <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                    <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                    <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</ion-header-bar>
+<!-- bottom：40 -->
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="profile height200 padding0 {{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}">
+        <div class="content">
+            <div class="amount f f-c marginTopUp20">
+                <div class="font-24" style="color: rgba(255, 255, 255, 0.7);padding-bottom: 5px">账户总额({{vm.model.subAccountTypeText.split(':')[5]}})</div>
+                <a href="javascript:void(0);" ng-class="{'icon iconfont icon-kejian2':vm.flag==true, 'icon iconfont icon-bukejian':vm.flag==false}" style="color: rgba(255, 255, 255, 0.7);font-size: 20px;margin-left: 10px;" ng-click="vm.display()"></a>
+            </div>
+            <div style="height: 45px;" class="line-height45 mb-10">
+                <div id="ydaySharedAmount" ng-if="vm.flag==true" decimals="2" count-up startVal="0" end-val="vm.model.amount" duration="1" class="font-45 line-height45"></div>
+                <label class="font-19" ng-if="vm.flag==false">****</label>
+                <!--<a href="javascript:void(0);" ng-class="{'icon iconfont icon-kejian2':vm.flag==true, 'icon iconfont icon-bukejian':vm.flag==false}" style="color: rgba(255, 255, 255, 0.7);font-size: 20px;margin-left: 10px;" ng-click="vm.display()"></a>-->
+            </div>
+            <div class="row" style="background: rgba(255, 255, 255, 0.1);padding: 10px 0;margin-top: 18px;">
+                <div class="col-50 border_right">
+                    <p class="font-14" style="color: rgba(255, 255, 255, 0.7);">上次收益({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+                    <p class="font-18" style="color: #fff;margin: 0 0 5px;">{{ vm.model.ydayAmount | number:2}}</p>
+                </div>
+                <div class="col-50">
+                    <p class="font-14" style="color: rgba(255, 255, 255, 0.7);">累计收益({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+                    <p class="font-18" style="color: #fff;margin: 0 0 5px;">{{ vm.model.totalAmount |number:2 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-icon-left" style="border:none">
+            <i class="icon iconfont icon-jinbiyue {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont--color list-iconfont"></i>
+            <!--<label class="font-17">可用余额({{vm.model.subAccountTypeText.split(':')[5]}})</label>-->
+            <label class="font-17">可用消费值({{vm.model.subAccountTypeText.split(':')[5]}})</label>
+            <div class="item-note font-18" id="cashAmount" decimals="2" count-up startVal="0" end-val="vm.model.cashAmount" duration="1" style="color: orange;"></div>
+        </div>
+        <div class="item item-gap"></div>
+        <div class="item item-icon-left item-icon-right border_top_no border_bottom_no"
+             ng-click="goNativeBackParams('tab.account-bills-list', {subAccountType:vm.subAccountType,seqType:7})">
+            <i class="icon iconfont icon-zidong {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont--color font-25"></i>
+            <label class="font-17" style="position: relative;top: -1px;">财务记录</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+    </div>
+</ion-content>
+<div class="f f-fs payment-main hidden">
+    <div class="f f-c f-ac payment-btn  payment-btnB {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}}"
+         ng-click="goNativeBackParams('tab.product-roll-in-account', {tradeType:'01', subAccountType:'1002'})">存入
+    </div>
+    <div class="f f-c f-a payment-btn {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}} background-line payment-btnA"
+         ng-click="goNativeBackParams('tab.product-roll-out', {tradeType:'01', subAccountType:'1000'})">转出
+    </div>
+</div>

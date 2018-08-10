@@ -1,0 +1,57 @@
+<ion-view view-title="实名认证" cache-view="false" class="ionview_verify verify_bgimg">
+    <div class="bar bar-header bar-dOrange top-trans f-ac f-sb">
+        <i class="icon iconfont icon-jiantou-left-copy" ng-click="goNativeBackParams('login', {loginType:'left'})"
+           style="font-size: 25px;margin-left:10px;"></i>
+        <div class="f-fs">
+            <span>实名认证</span>
+        </div>
+        <div class="visibility"><i class="icon iconfont icon-jiantou-left-copy" ng-click="goNativeBackParams('login', {loginType:'left'})" style="font-size: 25px;margin-left:10px;"></i></div>
+    </div>
+    <ion-content>
+        <div class="list register-list-inset margin_centent">
+            <div class="payment_reminder f f-as">
+                <i class="icon iconfont icon-notice colorOrangeRed font-30" style="margin-right: 5px;"></i>
+                <span class="font-13 colorOrangeRed">请填写真实信息，否则将不会被验证通过。</span>
+            </div>
+
+
+
+            <div class="input_border write">
+                <i class="icon iconfont icon-renzheng icon_calss colorOrange font-22"></i>
+                <input class="NO_bgcolor_input paddingLeft45" type="text" placeholder="请输入真实姓名"
+                       id="input_name"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.name">
+                <i class="icon ion-close-circled input-del-verify"
+                   style="top:4px; right: 100px;font-size: 15px;" ng-click="vm.model.name=''"></i>
+            </div>
+
+
+            <div class="input_border margin0 write">
+                <i class="icon iconfont icon-shimingxinxi icon_calss colorOrange font-22"></i>
+                <input class="NO_bgcolor_input paddingLeft45" type="text" placeholder="请输入身份证号"
+                       id="input_idCard"
+                       maxlength="18"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.idCard">
+                <i class="icon ion-close-circled input-del-verify"
+                   style="top:4px; right: 100px;font-size: 15px;" ng-click="vm.model.idCard=''"></i>
+            </div>
+
+            <div class="padding font-12 colorOrangeRed">
+                我们将对您的个人信息进行保密，请您放心填写。
+            </div>
+
+            <div>
+                <button class="button button-dOrange buttonWell" ng-click="vm.verify()">
+                    保存并使用
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+

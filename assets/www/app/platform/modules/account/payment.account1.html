@@ -1,0 +1,138 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}"
+                cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;"
+         ng-click="goNativeBack('tab.account')"></div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<!-- bottom：40 -->
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="profile profile-special1" style="height: 255px;">
+        <div class="content">
+
+            <div class="amount f f-ac f-c" style="margin:30px 0 15px;">
+                <div class="title font-24" style="color: rgba(255, 255, 255, 0.7);padding-bottom: 5px">昨日释放({{vm.model.subAccountTypeText.split(':')[5]}})</div>
+                <a href="javascript:void(0);" ng-class="{'icon iconfont icon-kejian2':vm.flag==true, 'icon iconfont icon-bukejian':vm.flag==false}" style="color: rgba(255, 255, 255, 0.7);font-size: 20px;margin-left: 10px;" ng-click="vm.display()"></a>
+            </div>
+            <div style="height: 45px;" class="line-height45">
+                <div id="ydaySharedAmount" ng-if="vm.flag==true" decimals="2" count-up startVal="0" end-val="vm.model.amountAll" duration="1" class="font-45 line-height45"></div>
+                <label class="font-19" ng-if="vm.flag==false">****</label>
+                <!--<a href="javascript:void(0);" ng-class="{'icon iconfont icon-kejian2':vm.flag==true, 'icon iconfont icon-bukejian':vm.flag==false}" style="color: rgba(255, 255, 255, 0.7);font-size: 20px;margin-left: 10px;" ng-click="vm.display()"></a>-->
+            </div>
+            <div class="title1">
+
+            </div>
+            <div class="btn_activate mb-10">
+                <div class="btnd-main">
+                    <!--<img class="alreadyActivate" ng-click="goNativeBackParams('tab.account-activateBalance', {subAccountType:vm.subAccountType})" ng-show="vm.model.isActivity==0" ng-src="app/platform/resources/img/futou.png">-->
+                    <img class="alreadyActivate" ng-click="goNativeBackParams('tab.account-activateBalance', {subAccountType:vm.subAccountType})" ng-src="app/platform/resources/img/futou.png">
+                    <div class="invest-box f f-c f-ac">
+                        <div class="invest-box--iconfont f-c f-ac" ng-show="vm.model.isActivity==1"><i class="iconfont icon-jiaoyiguanli payment-invest--icon"></i>投资中</div>
+                    </div>
+
+                    <!--<img ng-src="app/platform/resources/img/alreadyActivation.png">-->
+                    <!--<span ng-show="!vm.ActivationBlue" class="payment-invest">投资中</span>-->
+                    <!--<a class="sensitize-btn notSensitize button-a" ng-cloak ng-click="goNativeBackParams('tab.account-activateBalance', {subAccountType:vm.subAccountType,checkCode:vm.checkCode})" ng-show="vm.ActivationBlue">激活</a>
+                    <a class="sensitize-btn sensitize button-a" ng-cloak ng-show="!vm.ActivationBlue">已激活</a>-->
+                </div>
+            </div>
+            <div class="row" style="background: rgba(255, 255, 255, 0.1);padding: 10px 0;">
+                <div class="col-50 border_right">
+                    <p class="font-14" style="color: rgba(255, 255, 255, 0.7);">上次投资收益({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+                    <p class="font-18" style="color: #fff;margin: 0 0 5px;">{{ vm.model.ydayAmount | number:2}}</p>
+                </div>
+                <div class="col-50">
+                    <p class="font-14" style="color: rgba(255, 255, 255, 0.7);">累计投资收益({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+                    <p class="font-18" style="color: #fff;margin: 0 0 5px;">{{ vm.model.totalAmount |number:2 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item item-gap"></div>
+
+    <div class="paymeng-pirce border_top_no f-sb">
+        <div class="f-dc paymeng-box">
+            <p class="f-c list-pirce {{vm.model.subAccountTypeText.split(':')[2]}}">{{ vm.model.amount | number: 2 }}</p>
+            <p class="f-c font-15">未释放({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+        </div>
+        <div class="paymeng-line"></div>
+        <div class="f-dc paymeng-box">
+            <p class="f-c list-pirce {{vm.model.subAccountTypeText.split(':')[2]}}">{{ vm.model.cashAmountAll | number: 2 }}</p>
+            <p class="f-c font-15">累计释放({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+        </div>
+    </div>
+
+    <div class="item border_top_no f f-sb hidden" style="padding: 5px 10px;">
+        <div class="grid-item-50 text-left border_right">
+            <!--<div class="fab-button-label font-15">直推奖({{vm.model.subAccountTypeText.split(':')[5]}})</div>-->
+            <div class="fab-button-label font-15">直推奖(累计)</div>
+            <p class="account-detail">
+                <span class="font-13">{{ vm.model.totalDirectAmount | number: 2 }}</span>
+            </p>
+        </div>
+        <div class="grid-item-50 text-left">
+            <!--<div class="fab-button-label font-15 pdl-15">管理佣金({{vm.model.subAccountTypeText.split(':')[5]}})</div>-->
+            <div class="fab-button-label font-15 pdl-15">管理佣金(累计)</div>
+            <p class="account-detail pdl-15">
+                <span class="font-13">{{ vm.model.totalManageAmount | number: 2 }}</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="item item-gap"></div>
+    <div class="list">
+        <!--<div class="item item-icon-left" style="border:none">
+            <i class="icon iconfont icon-jinbiyue {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont&#45;&#45;color list-iconfont"></i>
+            <label class="font-17">可用投资余额({{vm.model.subAccountTypeText.split(':')[5]}})</label>
+            <div class="item-note font-18" id="cashAmount" decimals="2" count-up startVal="0" end-val="vm.model.cashAmount" duration="1" style="color: orange;"></div>
+        </div>-->
+        <div class="item item-icon-left item-icon-right border_top_no border_bottom_no"
+             ng-click="goNativeBackParams('tab.account-bills-list', {subAccountType:vm.subAccountType})">
+            <i class="icon iconfont icon-zidong {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont--color list-iconfont"></i>
+            <label class="font-17" style="position: relative;top: -1px;">财务记录</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+        <div class="item item-icon-left item-icon-right" style="border-bottom-width:0px;" ng-click="goNativeBackParams('tab.account-bill-list', {subAccountType:vm.subAccountType})">
+            <i class="icon iconfont icon-touzi1 {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont--color list-iconfont"></i>
+            <label class="font-17" style="position: relative;top: -1px;">交易记录</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+    </div>
+
+</ion-content>
+<div class="f f-fs payment-main hidden">
+    <div class="f f-c f-ac payment-btn  payment-btnB {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}}"
+         ng-click="goNativeBackParams('tab.product-roll-in-account', {tradeType:'01', subAccountType:'1002'})">存入
+    </div>
+    <div class="f f-c f-a payment-btn {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}} background-line payment-btnA"
+         ng-click="goNativeBackParams('tab.product-roll-out', {tradeType:'01', subAccountType:'1000'})">转出
+    </div>
+</div>

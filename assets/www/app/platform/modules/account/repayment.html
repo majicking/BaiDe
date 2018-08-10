@@ -1,0 +1,61 @@
+<ion-view view-title="修改交易密码" hide-tabs="true" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.manage')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="padding" style="font-size: 11px;color: orangered;">
+            提示：交易密码用于交易等操作的重要密码，请谨慎填写
+        </div>
+        <div class="list list-inset">
+            <div class="item item-input item-icon-right no-border write">
+                <span class="input-label font-15" style="font-weight: normal">原密码</span>
+                <input type="password"
+                       placeholder="原交易密码"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       maxlength="22"
+                       ng-model="vm.oldPassword">
+                <i class="icon ion-close-circled input-del-pwd" style="padding-top: 3px;font-size: 15px;right: 8px" ng-click="vm.oldPassword=''"></i>
+            </div>
+        </div>
+        <div class="padding" style="font-size: 10px;color: #96ABBB;">
+            密码要求长度在6-22位字符之间，至少包含数字、字母(区分大小写)、符号(!#$%^&*.~)中的2种
+        </div>
+        <div  class="list list-inset">
+            <div class="item item-input item-icon-right no-border write">
+                <span class="input-label font-15" style="font-weight: normal">新密码</span>
+                <input type="password"
+                       placeholder="新交易密码"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       maxlength="22"
+                       ng-model="vm.newPassword">
+                <i class="icon ion-close-circled input-del-pwd" style="padding-top: 3px;font-size: 15px;right: 8px" ng-click="vm.newPassword=''"></i>
+            </div>
+            <hr>
+            <div class="item item-input item-icon-right no-border write">
+                <span class="input-label font-15" style="font-weight: normal">再确认</span>
+                <input type="password"
+                       placeholder="确认交易密码"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       maxlength="22"
+                       ng-model="vm.rePassword">
+                <i class="icon ion-close-circled input-del-pwd" style="padding-top: 3px;font-size: 15px;right: 8px" ng-click="vm.rePassword=''"></i>
+            </div>
+        </div>
+        <div class="padding" style="padding-bottom:0px; font-size: 12px;color: #96ABBB;">
+            交易密码不能直接找回，需联系客服QQ：1094099713 进行找回，请不要忘记，以免给您的操作带来不便。
+        </div>
+        <div class="padding padding-horizontal">
+            <button class="button button-block button-dblue" ng-click="vm.changePassword()">
+                修改密码
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

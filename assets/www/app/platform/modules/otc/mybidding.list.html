@@ -1,0 +1,249 @@
+<!-- 2018.04.16 by tourway -->
+<style>
+    .mysells-list{
+        padding:16px !important;
+        border:none !important;
+        margin:0 20px 10px 20px;
+        background:url('app/platform/resources/img/otc/item-bg.png') no-repeat;
+        background-size: 100%  100%;
+    }
+    .mysells-list:last-child{
+        margin-bottom: 0;
+    }
+    .mysells-list__main{
+        position: relative;
+    }
+    .mysells-list__line{
+        width: 100%;
+        height: 1px;
+        background: url("app/platform/resources/img/otc/line.png");
+        margin-bottom: 7px;
+    }
+    .mysells-list__odd{
+        font-family: MicrosoftYaHei;
+        font-size: 17.5px !important;
+        font-weight: normal !important;
+        font-stretch: normal !important;
+        color: #333333 !important;
+        line-height: 24px !important;
+        margin-bottom: 4.5px !important;
+    }
+    .mysells-list__price{
+        min-width: 80px;
+        width: 50%;
+        font-size: 14px !important;
+        color:#808080;
+        font-weight: normal;
+        font-stretch: normal;
+    }
+    .mysells-list__state{
+        font-size: 14px !important;
+        padding:4px 19px !important;
+        color: #fff !important;
+        border-radius: 20px;
+    }
+    .sells-list__time{
+        font-size: 14px !important;
+        color: #808080 !important;
+    }
+    /* 取消 */
+    .state-cancel{
+        background-color:#e6640d !important;
+    }
+    /* 交易中 */
+    .state-deal{
+        background-color:#339dff !important;
+    }
+    /* 已付款 */
+    .state-payment{
+        background-color:#2bc7c9 !important;
+    }
+    /* 交易完成 */
+    .state-complete{
+        background-color:#72ba1c !important;
+    }
+    /* 挂单中 */
+    .state-guadan{
+        background-color:#ffaf30 !important;
+    }
+    .sells-list__mb{
+        margin-bottom: 4px;
+    }
+    .sells-list__mb:last-child{
+        margin-bottom: 0;
+    }
+</style>
+<script>
+    $(function(){
+        /*筛选toggle*/
+        $('#btn_search').click(function(){
+            $('.toggle').slideToggle("fast",function(){
+                if ($('.mask').is(":hidden")) {
+                    $('.mask').fadeIn("fast");
+                }else{
+                    $('.mask').fadeOut("fast");
+                }
+            });
+        });
+        /*mask锁定*/
+        $(".mask").on('touchmove',function(event){
+            event.preventDefault();
+        },false);
+        /*筛选按钮*/
+        $('.toggle').find('li').click(function(){
+            $(this).addClass("btn-blue").siblings().removeClass("btn-blue");
+            $('#title').text($(this).text());
+        })
+        /*点击空白隐藏*/
+        var display = $('.toggle').css('display');
+        $(document).bind('click',function(e){
+            var target = $(e.target);
+            if(target.attr('class') == 'mask' || target.parents('ul').attr('id') == 'toggle'/* && target.attr('id') !== "select" && display == 'block'*/){
+                $(".toggle").slideUp('fast');
+                $('.mask').fadeOut('fast');
+            }
+        })
+    });
+</script>
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBack('tab.account')"></div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <!--<button class="button button-icon-sm button-clear icon iconfont ion-android-search" id="btn_search" style="position: absolute;right:44px;top:6px;"></button>--><!--搜索图标-->
+    <div class="button button-clear" style="position: absolute;right:10px;top:9px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<div class="tabs-striped tabs-top tabs-color-{{vm.model.subAccountTypeText.split(':')[2]}}" style="height: 49px;margin-top:44px;text-align: center;position: relative;z-index: 6">
+    <div class="tabs" style="top: 40px;position: static;">
+        <!--<a class="tab-item text-grey fr" ng-class="{'text-{{vm.model.subAccountTypeText.split(':')[2]}} active':vm.criteria.otcType == otcType.value}" ng-click="vm.otcTypeChanged(otcType.value)" ng-repeat="otcType in vm.otcTypes" >{{otcType.text}}</a>-->
+        <div style="margin:0 auto; position: relative">
+            <a class="after_action {{vm.model.subAccountTypeText.split(':')[2]}}" style="position: relative" ng-click="vm.otcTypeChanged(0)">卖出</a>
+            <a class="after_action actived-s {{vm.model.subAccountTypeText.split(':')[2]}}" style="position: relative" ng-click="vm.otcTypeChanged(1)">买入</a>
+            <div class="otcTab-bline {{vm.model.subAccountTypeText.split(':')[2]}} background-line"></div>
+        </div>
+    </div>
+</div>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}" style="margin-top: 49px">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="item-gap" style="background:#eceff1;min-height: 5px"></div>
+    <ul class="list tempporAccList">
+        <li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无数据</li>
+        <!--<li ng-click="goNativeBackParams('tab.otcbuy-biddingParticulars', {subAccountType:vm.subAccountType,biddingSn:biddingList.sn})" ng-repeat='biddingList in vm.items'>-->
+        <li id="{{ item.id }}" ng-click="vm.goBiddingPart('tab.otcbuy-biddingParticulars',vm.subAccountType ,item.sn ,vm.criteria.otcType , item.endTime)" ng-repeat='item in vm.items'>
+            <div class="bidding_odd_numbers f f-sb">
+                <div>
+                    <span class="bidding_text_span">单号：</span>
+                    <span class="bidding_text_oddNumber">{{ item.sn }}</span>
+                </div>
+                <span class="bidding_text_Time">{{ item.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+            </div>
+            <div class="biddingList_content">
+                <div class="f f-c mb-10">
+                    <div class="b-r width50">
+                        <p class="bidding_designation f-c">数量</p>
+                        <p class="bidding_price f-c webFont">{{ item.sellAmount }}</p>
+                    </div>
+                    <div class="width50">
+                        <p class="bidding_designation f-c" ng-if="vm.criteria.otcType==0 && vm.criteria.otcType!=1">当前最高价格</p>
+                        <p class="bidding_designation f-c" ng-if="vm.criteria.otcType==1 && vm.criteria.otcType!=0">当前最低价格</p>
+                        <p class="bidding_price f-c webFont">{{ item.realprice | number: 1 }}</p>
+                    </div>
+                </div>
+                <!--  count_down  倒计时-->
+                <div class="count-down--main">
+                    <div class="DownTimeDiv f f-c count_down {{vm.model.subAccountTypeText.split(':')[2]}} background-line" ng-if="item.endTime != '2' && item.endTime != '1'">
+                        <div class="f-ac">
+                            <div>倒计时：</div>
+                            <div ng-show="item.endTime != '2' && item.endTime != '1'">
+                                <timer end-time="item.endTime" finish-callback="finished(item.id)" >{{ hours || '00' }}:{{ minutes || '00' }}:{{ seconds || '00' }}:{{ millis | limitTo:-3 | limitTo:2 }}</timer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="count-down--{{ item.id }}" style="display: none;">
+                    <div class="f f-c f-ac count_down count-down--end">
+                        <div class="f f-c f-ac">竞价已结束</div>
+                    </div>
+                </div>
+                <div ng-if="item.endTime == '2' && item.endTime != '1'" >
+                    <div class="f f-c f-ac count_down" ng-class="{ 'count-down--end': item.endTime == '2'|| vm.endTime == 2}">
+                        <div class="f f-c f-ac">竞价已结束</div>
+                    </div>
+                </div>
+                <div class="f f-c f-ac count_down" ng-show="item.endTime == '1'&&item.endTime != '2'">
+                    <div class="f f-c f-ac">开始竞价</div>
+                </div>
+
+            </div>
+        </li>
+    </ul>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="1%" ></ion-infinite-scroll>
+</ion-content>
+<div class="toggle" style="display:none;margin: 0;">
+    <!--<h6 style="text-align: center;">请选择要查看的状态</h6>-->
+    <ul id="toggle">
+        <li style="flex-grow:1;align-self:center;font-size: 13px" ng-class="{'btn-blue':vm.selectType.value==item.value&&item.value!=null}" ng-repeat='item in vm.selectTypes' ng-click="vm.selectItem(item)">
+            {{item.text}}
+        </li>
+    </ul>
+</div>
+<div class="mask" style="display:none;"></div>
+<script>
+    var widthAt=$(".after_action").width();
+    $(".otcTab-bline").css({
+        "left":0,
+        "width":widthAt
+    });
+    $(".after_action").click(function () {
+        var widthThis=$(this).width();
+        var otcleft=$(".otcTab-bline").offset().left;
+        if(otcleft>widthThis){
+
+        }
+        if(this.innerHTML=="买入"){
+            if(otcleft>widthThis){
+            }else {
+                $(this).toggleClass("actived-s");
+                $(this).siblings().toggleClass("actived-s")
+                $(".otcTab-bline").css({
+                    "left":widthThis+5
+                })
+            }
+        }else {
+            if(otcleft<widthThis){
+            }else {
+                $(this).toggleClass("actived-s");
+                $(this).siblings().toggleClass("actived-s")
+                $(".otcTab-bline").css({
+                    "left":0,
+                })
+            }
+        }
+
+    })
+</script>

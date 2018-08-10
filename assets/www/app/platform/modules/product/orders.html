@@ -1,0 +1,98 @@
+<!--2018.4.17 zl -->
+
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBack('tab.account')">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<div class="tabs-striped tabs-top tabs-color-{{vm.model.subAccountTypeText.split(':')[2]}}" style="height: 49px;margin-top:44px;text-align: center;position: relative;z-index: 6">
+    <div class="tabs" style="top: 40px;position: static;">
+        <!--<a class="tab-item text-grey fr" ng-class="{'text-{{vm.model.subAccountTypeText.split(':')[2]}} active':vm.criteria.state==state.value}" ng-click="vm.stateChanged(state.value)" ng-repeat="state in vm.stateList" >{{state.text}}</a>-->
+        <div style="position: relative;width: 100%">
+            <a class="click_ajk add {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}}" style="position: relative;width: 25%;text-align: center;display: inline-block;"  ng-repeat="state in vm.stateList" ng-click="vm.stateChanged(state.value)">{{state.text}}</a>
+            <div class="otcTab-bline {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}} background-line"></div>
+        </div>
+    </div>
+</div>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}" style="margin-top: 49px">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="item item-gap" style="background:#eceff1;min-height: 5px"></div>
+    <div class="list" style="background-color:#fff;">
+        <div class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无存入记录</div>
+        <div class="row" style="border-top:thin;border-top-style: solid;border-top-color: #DDDDDD;width: 94%;margin: 0 3%;padding: 10px 0"
+             ng-repeat="item in vm.items">
+            <div class="col-40" style="padding: 0 22px;text-align:center">
+                <p class="font-25" style="margin: 10px 0 5px;font-weight: bold;line-height: 25px">{{item.rate}}</p>
+                <p class="font-10" style="margin-top:25px;color: #666">算力</p>
+            </div>
+            <div class="col-60" style="padding: 0 22px;border-left: thin solid #cbcbcb;">
+                <p class="font-12" style="margin: 0 0 5px;">固定节点（{{item.tradeName}}）</p>
+                <p class="font-10" style="color: #666">存入数量：{{item.amount}}</p>
+                <p class="font-10" style="color: #666">累计收益：{{item.state == '00'?'------':item.sharedAmount}}</p>
+                <p class="font-10" style="color: #666">算力时间：{{item.interestDate}}</p>
+            </div>
+        </div>
+    </div>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="1%" ></ion-infinite-scroll>
+</ion-content>
+<script type="text/javascript">
+    funTimea();
+    function funTimea() {
+        setTimeout(funTimeab,100)
+    }
+    function funTimeab() {
+        var widthAt=$(".click_ajk").width();
+        $(".click_ajk").eq(0).css({
+            "color":"#27ae60"
+        });
+        $(".click_ajk").eq(0).siblings().css({
+            "color":"#A8A8A8"
+        });
+        $(".otcTab-bline").css({
+            "left":0,
+            "width":widthAt
+        });
+        $(".click_ajk").click(function () {
+            //var widthThis=$(this).width();
+            var otcleft=$(this).offset().left;
+            $(".otcTab-bline").css({
+                "left":otcleft
+            });
+            $(this).css({
+                "color":"#27ae60"
+            });
+            $(this).siblings().css({
+                "color":"#A8A8A8"
+            });
+        })
+    }
+
+</script>

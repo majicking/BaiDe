@@ -1,0 +1,88 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBack('tab.account')">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <ul>
+                <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                    <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                    <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+                </li>
+                <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                    <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                    <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+                </li>
+                <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                    <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                    <label style="font-size: 15px">邀请码</label>
+                </li>
+                <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                    <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                    <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="profile profile-special2">
+        <div class="content">
+            <div class="amount">
+                <div style="padding-top: 20px;">{{vm.model.ydaySharedAmount|number:2}}</div>
+            </div>
+            <div class="title" style="color: rgba(255, 255, 255, 0.7);">昨日获得 ({{vm.model.subAccountTypeText.split(':')[5]}})</div>
+            <div class="title2">
+                <label style="font-size: 19px;">账户总额</label>
+                <label id="amount" style="font-size: 19px"  decimals="2" count-up startVal="0" end-val="vm.model.amount" duration="1" ng-if="vm.flag==true"></label>
+                <label style="font-size: 19px;" ng-if="vm.flag==true">{{vm.model.subAccountTypeText.split(':')[5]}}</label>
+                <label style="font-size: 19px" ng-if="vm.flag==false">****{{vm.model.subAccountTypeText.split(':')[5]}}</label>
+                <a href="javascript:void(0);" ng-class="{'icon iconfont icon-kejian2':vm.flag==true, 'icon iconfont icon-bukejian':vm.flag==false}" style="color: rgba(255, 255, 255, 0.7);font-size: 20px" ng-click="vm.display()"></a>
+            </div>
+            <div class="row" style="border-top:thin;border-top-style: solid;border-top-color: #fff;width: 94%;margin: 0 3%;padding: 10px 0">
+                <div style="position: relative; left: 50%; border-left:thin;border-left-style: solid;border-left-color: #fff"></div>
+                <div class="col-50">
+                    <p class="font-18" style="color: #fff;margin: 0 0 5px;">{{vm.model.totalSharedAmount|number:2}}</p>
+                    <p class="font-14" style="color: rgba(255, 255, 255, 0.7);">累计获得({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+                </div>
+                <div class="col-50">
+                    <p class="font-18" style="color: #fff;margin: 0 0 5px;">{{vm.model.tradeAmount|number:2}}</p>
+                    <p class="font-14" style="color: rgba(255, 255, 255, 0.7);">累计交易额({{vm.model.subAccountTypeText.split(':')[5]}})</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-icon-left item-icon-right" style="border:none">
+            <i class="icon iconfont icon-ruhetigaodengjifen" style="font-size: 25px;color: #00aaee;"></i>
+            <label class="font-17">实时价格(元)</label>
+            <i class="icon ion-chevron-right icon-accessory" style="width: 50px;padding-left: 18px;color: #fff">
+                <div class="tags-price" style="">
+                    <span class="jia_ge_die" ng-if="vm.model.upDown=='0'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_zhang" ng-if="vm.model.upDown=='1'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_gain" ng-if="vm.model.upDown=='2'">{{vm.model.rate}}%</span>
+                </div>
+                <div class="item-note-price font-17">{{vm.model.market|number:2}}</div>
+            </i>
+        </div>
+        <div class="item item-gap"></div>
+        <div class="item item-icon-left item-icon-right" style="border:none" ng-click="goNativeBackParams('tab.account-payment-list', {subAccountType:vm.subAccountType, back:'payment'})">
+            <i class="icon iconfont icon-touzi1" style="font-size: 25px; color:#00aaee;"></i>
+            <label class="font-17" style="position: relative;top: -1px;">财务记录</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+        <div class="item item-icon-left item-icon-right"  style="border-bottom-width:0px" ng-click="goNativeBackParams('tab.account-bill-list', {subAccountType:vm.subAccountType})">
+            <i class="icon iconfont icon-zidong" style="font-size: 25px; color:#00aaee;"></i>
+            <label class="font-17" style="position: relative;top: -1px;">交易记录</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div></div>
+</ion-content>

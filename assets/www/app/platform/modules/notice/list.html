@@ -1,0 +1,18 @@
+<ion-header-bar hide-tabs="false" id="s-header" class="bar-dblue" cache-view="false">
+    <h1 class="title1" style="color: #fff;font-weight: normal">消息中心</h1>
+</ion-header-bar>
+<ion-content class="bg-color">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <ui class="list">
+        <li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无公告</li>
+        <li class="item item-text-wrap" ng-repeat='notice in vm.items' ui-sref="tab.notice-list-notice({id:notice.id})">
+            <div class="title_detail">{{notice.title}}</div>
+            <p style="margin-top: 10px;">{{notice.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        </li>
+    </ui>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="1%" ></ion-infinite-scroll>
+</ion-content>

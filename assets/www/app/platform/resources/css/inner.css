@@ -1,0 +1,157 @@
+body{
+	font-family: "Helvetica";
+}
+table{
+	font-family: "Microsoft YaHei",Arial;
+}
+.bid{
+	padding:0.625em;
+	border-top: 1px solid #989898;
+}
+.bidInfoBox{
+	background-color: #ffffff;
+	border: 1px solid #e2e2e2;
+	height: auto;
+}
+.bidInfoBox .icon-zhang{
+	width: 5.5625em;
+	height: 5.5625em;
+	background: url(../img/home/icon_zhang.png) no-repeat;
+	background-size:100% 100%;
+	right: 0.0875em;
+	top: 1.8725em;
+}
+.bidInfoBox p{
+	height: 2.25em;
+	line-height: 2.25em;
+	background-color: #e5e9ed;
+	padding-left: 0.78125em;
+}
+.bidInfoBox .bidName{
+	font-size: 0.9375em;
+	margin-right: 0.46875em;
+	color: #3a3a3a;
+}
+.bidInfoBox .qiXiTime{
+	font-size: 0.8125em;
+	color: #5e5e5e;
+	margin-left: 0.46875em;
+}
+.bidInfoBox .info-list{
+	padding: 0.625em;
+	overflow: hidden;
+}
+.bidInfoBox ul li{
+	float: left;
+	width: 50%;
+	line-height: 1.65em;
+	padding-top: 0.3em;
+}
+.bidInfoBox ul li .inName{
+	font-size: 0.6875em;
+}
+.bidInfoBox ul li .shu{
+	font-size: 1.9375em;
+	font-weight: bold;
+}
+.bidInfoBox ul li ss{
+	font-size: 0.6875em;
+	color: #5e5e5e;
+}
+.bidInfoBox ul li .totalShu{
+	color: #eb5345;
+	font-size: 1.625em;
+	font-weight: bold;
+}
+.bidInfoBox ul li .huanType{
+	font-size: 0.9375em;
+}
+
+
+/*proBox*/
+.proBox{
+	line-height: 2.0625em;
+	padding-left: 0.625em;
+	overflow: hidden;
+}
+.proBox .proName{
+	float: left;
+	padding-right:0.4375em;
+	font-size: 0.6875em;
+}
+.proBox .process{
+	float: left;
+	width: 12.1875em;
+	height: 0.375em;
+	background: #e6e6e6;
+	border-radius: 0.1875em;
+	margin-top: 0.84375em;
+	margin-right: 0.15625em;
+}
+.proBox .process .green{
+	height: 0.375em;
+	background: #a4cc43;
+	border-radius: 0.1875em;
+}
+.proBox .proNum{
+	float: left;
+	font-size: 0.9375em;
+	font-weight: normal;
+}
+.proBox .proBai{
+	float: left;
+	font-size: 0.5em;
+}
+
+.finish-count{
+	line-height: 2.8125em;
+}
+.finish-count .s1{
+	font-size: 0.875em;
+}
+.finish-count .s2{
+	font-size: 1em;
+	padding: 0 0.3125em;
+}
+.finish-count .s3{
+	color: #8c8c8c;
+	font-size: 0.6875em;
+}
+.finish-count b{
+	font-weight: normal;
+	padding-left: 0.8375em;
+}
+.finish-count strong{
+	font-weight: normal;
+	font-size: 1.053125em;
+	color: #717171;
+}
+
+.detail{
+	padding: 0.3em;
+	margin-top: -0.925em;
+}
+.detail .panel{
+	width:100%;
+	background-color: #d6d9db;
+	border:1px solid #bebebe;
+	border-radius:0.23em;
+	/*border-bottom-left-radius:0.23em; */
+	font-size:0.8125em; 
+	color:#464646; 
+	height:2.384em; 
+	line-height:2.384em; 
+	text-align:center;
+	/*border-right:none;*/ 
+	font-family:"微软雅黑"
+}
+.detail-list{
+	padding: 0.5em 0;
+}
+
+.buyListBox{border: 1px solid #e2e2e2;width: 100%;background-color: #fff;}
+.buyListBox thead{background-color: #fafafa;font-size: 0.8125em;line-height: 2.34375em;}
+.buyListBox td{text-align: center;}
+.buyListBox tbody tr{border-bottom: 1px solid #e2e2e2;}
+.buyListBox tbody tr:last-child{border-bottom: none;}
+.buyListBox tbody td{line-height: 3em;color: #848484;font-size: 0.875em;}

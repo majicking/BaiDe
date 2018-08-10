@@ -1,0 +1,103 @@
+<style>
+    .item-select select{
+        top: 0;
+        height: 47px;
+    }
+</style>
+
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}"
+                cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;"
+         ng-click="goNativeBackParams('tab.account-payment-account-0001',{subAccountType:'0030'})">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <div class="list">
+        <!--<div class="item withdraw f f-fs " style="padding: 10px 15px 10px;">
+            <div class="mr-10" style="line-height: 42px;margin-top: 4px;">
+                <i class="iconfont font-25 {{vm.model.subAccountTypeText.split(':')[1]}} {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont&#45;&#45;color"></i>
+            </div>
+            <div>
+                <label style="font-size: 16px">可投资余额({{vm.model.subAccountTypeText.split(':')[5]}})</label>
+                <div class="font-16" style="color: orange;">{{ vm.input.doMoney | number: 2 }}</div>
+            </div>
+        </div>-->
+        <label class="item item-input item-select">
+            <div class="input-label" style="font-weight: normal">{{ vm.requestData.selectName }}配套</div>
+            <select ng-model="vm.model.productChoose" ng-change="vm.productChoose(vm.model.productChoose)" style="border-bottom: .5px solid #ddd">
+                <option value=""  ng-selected="productChoose.id==''">请选择</option>
+                <option value="{{ productChoose.id }}" ng-repeat="productChoose in vm.productChooseList"  ng-selected="productChoose.id=='0'">{{ productChoose.name }}</option>
+            </select>
+        </label>
+        <div class="item-gap"></div>
+        <label class="item item-input item-select">
+            <div class="input-label" style="font-weight: normal">{{ vm.requestData.selectName }}支付方式</div>
+            <select ng-model="vm.model.price" ng-change="vm.priceChanged(vm.model.price)" style="border-bottom: .5px solid #ddd">
+                <option value=""  ng-selected="price.id==''">请选择</option>
+                <option value="{{ price.type }}" ng-repeat="price in vm.priceList"  ng-selected="price.id=='0'">{{ price.payName }}</option>
+            </select>
+        </label>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal;">购买金额</span>
+            <input type="text"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.money"
+                   maxlength="9"
+                   ng-change="vm.moneyChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入购买金额">
+        </div>
+
+
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write">
+            <span class="input-label withdraw" style="font-weight: normal;">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.payPassword"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px"
+               ng-click="vm.input.payPassword=''"></i>
+        </div>
+        <!-- <div style="font-size: 12px;color: rebeccapurple;position: relative;margin: 10px">
+             密码要求长度在6-22位字符之间，至少包含数字、字母(区分大小写)、符号(!#$%^&*.~)中的2种
+         </div>-->
+    </div>
+    <div class="padding-horizontal">
+        <button class="button button-block {{vm.model.subAccountTypeText.split(':')[4].split(',')[3]}}"
+                ng-disabled="vm.disabled" ng-click="vm.confirm()">
+            确认投资
+        </button>
+    </div>
+</ion-content>

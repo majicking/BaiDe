@@ -1,0 +1,222 @@
+<!--2018.4.25 zl -->
+<style>
+    .roll-title{
+        width: 100%;
+        padding:30px 0;
+        background: #fff;
+        border-bottom: 0.5px solid #ddd;
+    }
+    .roll-icon{
+        font-size: 22px;
+        color: #15D6B1;
+        margin-right: 8px;
+    }
+    .roll-icon__s{
+        color: #15D6B1 !important;
+    }
+    .roll-smbox{
+        margin-bottom: 10px;
+        background: #fff;
+        padding: 10px 20px;
+        width: 100%;
+        border-bottom: 0.5px solid #ddd;
+    }
+    .roll-sm{
+        font-size: 14px;
+        color:#313131;
+    }
+    .roll-icon__time{
+        font-size: 18px;
+        color: #2A9AEC;
+        margin-left: 6px;
+    }
+    .roll-title__left{
+        margin-right: 10%;
+    }
+    .roll-title__right{
+        margin-left: 15%;
+    }
+    .roll-line{
+        width: 1px;
+        height: inherit;
+        background: #E8E8E8;
+    }
+    .roll-ti__sd{
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+    }
+    .roll-big{
+        font-size: 24px;
+        color: #313131;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .roll-bigR{
+        color: #E8541D;
+    }
+    .roll-icon__tim{
+        margin-left: 5px;
+    }
+    .roll-sm__line{
+        display: inline-block;
+        width: 1px;
+        height: 15px;
+        background: #E8E8E8;
+    }
+    .roll-good__info{
+        color: #999;
+        font-size: .75rem;
+    }
+
+    .detail{
+        padding: 0.3em;
+        margin-top: -0.925em;
+    }
+    .detail .panel{
+        width:100%;
+        background-color: #d6d9db;
+        border:1px solid #bebebe;
+        border-radius:0.23em;
+        /*border-bottom-left-radius:0.23em; */
+        font-size:0.8125em;
+        color:#464646;
+        height:2.384em;
+        line-height:2.384em;
+        text-align:center;
+        /*border-right:none;*/
+        font-family:"微软雅黑"
+    }
+    .detail-list{
+        padding: 0.5em 0;
+    }
+    .buy_rowel{
+        display: block;
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        font-size: 0.75rem;
+        color: #0BA8F0;
+        text-decoration: underline;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+</style>
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeStyle.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBackParams('tab.account-payment-account-0004', {subAccountType:'0011'})">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">
+        {{vm.model.subAccountTypeStyle.split(':')[0]}}
+        <!--{{vm.tradeType == '01'?'临时节点'-->
+            <!--:vm.tradeType == '02'?'固定节点（1个月）'-->
+            <!--:vm.tradeType == '03'?'固定节点（3个月）'-->
+            <!--:vm.tradeType == '04'?'固定节点（6个月）'-->
+            <!--:vm.tradeType == '05'?'固定节点（12个月）'-->
+            <!--:''}}-->
+    </h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="icon iconfont icon-jiedianjinduliebiaotuan header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')" ng-if="vm.model.userType=='0'">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeStyle.split(':')[4].split(',')[1]}}">
+    <div class="list">
+        <div class="roll-main">
+            <div class="roll-title">
+                <div class="floatLeft border_right pos-r" style="width: 50%;">
+                    <p class="roll-big roll-bigR">
+                        <span class="font-16 interest_span pos-r" style="bottom: 2px;color: #9F9F9F">约</span>
+                        <span class="interest_span">{{vm.rollwelcomeParameterData.split(":")[0]}}%</span>
+                    </p>
+                    <p class="roll-ti__sd">日算力<i class="icon ion-ios-information-outline roll-icon__time pos-r" style="top: 2px;"></i></p>
+                </div>
+                <div class="floatLeft" style="width: 50%">
+                    <p class="roll-big">{{vm.rollwelcomeParameterData.split(":")[1]}}</p>
+                    <p class="roll-ti__sd">算力期限</p>
+                </div>
+                <div class="clearFloat"></div>
+            </div>
+            <div class="f f-sb f-ac roll-smbox">
+                <span class="roll-sm f-ac roll-icon__s"><i class="icon ion-ios-bolt-outline roll-icon"></i>安全保障</span>
+                <span class="roll-sm__line"></span>
+                <span class="roll-sm">{{vm.productType}}</span>
+                <span class="roll-sm__line"></span>
+                <span class="roll-sm">{{vm.rollwelcomeParameterData.split(":")[2] | number:0}}个起存</span>
+            </div>
+        </div>
+        <div class="item product item-icon-left" style="border: none">
+            <i class="icon iconfont {{vm.model.subAccountTypeText.split(':')[1]}} {{vm.model.subAccountTypeText.split(':')[2]}}" style="font-size: 25px;"></i>
+            <!--<i class="icon iconfont ion-android-people" style="font-size: 25px;"></i>-->
+            <label style="font-size: 16px">{{vm.model.subAccountTypeText.split(':')[0]}}</label>
+            <div class="item-note-orange">{{vm.model.subAccountTypeText.split(':')[3]}}</div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label product write" style="border: none">
+            <span class="input-label product" style="font-weight: normal;">{{vm.model.subAccountTypeStyle.split(':')[0]}}数量</span>
+            <input type="number"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.money"
+                   ng-change="vm.moneyChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="操作最低数量为 {{vm.rollwelcomeParameterData.split(':')[2]| number:2}}"
+                   ng-if="vm.rollwelcomeParameterData.split(':')[2] != ''&&vm.rollwelcomeParameterData.split(':')[2] != '0'">
+            <input type="number"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.money"
+                   ng-change="vm.moneyChanged()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入{{vm.model.subAccountTypeStyle.split(':')[0]}}数量"
+                   ng-if="vm.rollwelcomeParameterData.split(':')[2] == ''||vm.rollwelcomeParameterData.split(':')[2] == '0'">
+            <i class="icon ion-close-circled input-del-product" style="padding-top: 8px" ng-click="vm.input.money=null;vm.moneyChanged()"></i>
+            <div class="item-note-dblue font-14" style="position:absolute;padding-top: 7px;right: 16px" ng-click="vm.allEntry()">有效额度</div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write" style="border: none">
+            <span class="input-label withdraw" style="font-weight: normal;">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.payPassword"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-withdraw" style="padding-top: 8px" ng-click="vm.input.payPassword=''"></i>
+        </div>
+    </div>
+    <div class="padding-horizontal">
+        <!--<button class="button button-block button-block {{vm.model.subAccountTypeStyle.split(':')[4].split(',')[3]}}" ng-disabled="vm.disabled" ng-click="vm.confirm()">-->
+            <!--确认转出-->
+        <!--</button>-->
+        <!-- 2018.04.16 by tourway -->
+        <button class="button button-block {{vm.model.subAccountTypeStyle.split(':')[4].split(',')[3]}}" ng-disabled="vm.disabled" ng-click="vm.confirm()">
+            确认{{vm.model.subAccountTypeStyle.split(':')[0]}}
+        </button>
+    </div>
+</ion-content>

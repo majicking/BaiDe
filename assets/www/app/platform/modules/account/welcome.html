@@ -1,0 +1,166 @@
+<!-- 2018.04.20 by zl -->
+<ion-header-bar id="s-header" class="bar-dblue" cache-view="false">
+    <div class="button button-icon-sm button-clear" style="position: absolute; right:10px;top:6px;font-size: 15px" ng-click="vm.welComeLoginGoNativeBackParams('pwdGesture')">登录</div>
+    <!--<h1 class="title1" style="color: #fff;font-weight: normal">12111</h1>-->
+</ion-header-bar>
+<ion-content class="bg-color">
+    <div class="bg-color" style="overflow-y: scroll">
+        <input type="hidden" id="useID" value="{{vm.userId}}"/>
+        <div class="Carousel pos-r">
+            <ion-slide-box class="full-image" auto-play="true" does-continue="true" show-pager="true">
+                <ion-slide ng-repeat="item in vm.imgData">
+                    <img class="full-image" ng-src="{{ item.imgPath }}"/>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <div class="nav_NOclick">
+            <div class="floatLeft border_right">
+                <div class="nav_icon_main">
+                    <span class="icon ion-lock-combination main_span_icon" style="font-size: 24px"></span>
+                    <span class="main_span_text">安全保障</span>
+                </div>
+            </div>
+            <div class="floatLeft">
+                <div class="nav_icon_main">
+                    <span class="icon ion-stats-bars main_span_icon" style="font-size: 29px;"></span>
+                    <span class="main_span_text">数据公开</span>
+                </div>
+            </div>
+            <div class="clearFloat"></div>
+        </div>
+        <div class="item item-gap"></div>
+        <!--活期理财-->
+        <div class="list-financing">
+            <div class="item item-icon-left item-icon-right" style="border-top:none;border-bottom:0.5px solid #DDDDDD;padding-top: 10px; padding-bottom:10px; position: relative; padding-left: 30px !important;">
+                <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>
+                <label class="font-18" style="position: relative;top: 1px;"><b>临时节点</b></label>
+                <span class="font-14" style="padding-left: 10px">算力管家&nbsp灵活进出</span>
+            </div>
+            <div class="list" style="background-color:#fff;">
+                <ul class="product_ulList">
+                    <li ng-repeat="product in vm.model.temporary.list" ng-click="goNativeBackParams('rollWellcome', {subAccountType:'1002',tradeType:product.value})">
+                        <div class="productList_left">
+                            <p class="styleFirst" style="color: #F75155">
+                                <span class="font-16 interest_span pos-r" style="bottom: 2px;color: #9F9F9F">约</span>
+                                <span class="interest_span">{{product.text.split(":")[2]}}%</span>
+                            </p>
+                            <p class="font-16 styleTwo" style="padding-left: 20px ">日算力</p>
+                        </div>
+                        <div class="productList_right">
+                            <!--<p class="styleFirst" style="color: #000;font-size: 20px;">{{product.text.split(":")[1]}}</p>-->
+                            <p class="styleFirst" style="color: #000;font-size: 20px;">{{product.text.split(":")[1]}}</p>
+                            <p class="font-16 styleTwo">临时节点有更多算力</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="item item-gap"></div>
+        <!--固定期限-->
+        <div  class="list-financing">
+            <div class="item item-icon-left item-icon-right" style="border-top:none;border-bottom:0.5px solid #DDDDDD;padding-top: 10px; padding-bottom:10px; position: relative; padding-left: 30px !important;">
+                <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>
+                <label class="font-18" style="position: relative;top: 1px;"><b>固定节点</b></label>
+                <span class="font-14" style="padding-left: 10px">安全省心&nbsp算力更多</span>
+                <!--<div class="font-14" style="position: relative;top: -1px;color: #666">安心资产 收益领跑</div>
+                <div class="click_more"><span class="span_more">更多</span><span class="iconfont ion-chevron-right"></span></div>-->
+            </div>
+            <div class="list" style="background-color:#fff;">
+                <ul class="product_ulList">
+                    <li ng-repeat="product in vm.model.fixed.list"
+                        ng-click="goNativeBackParams('rollWellcome', {subAccountType:'1002',tradeType:product.value})">
+                        <div class="productList_left">
+                            <p class="styleFirst" style="color: #F75155">
+                                <span class="font-16 pos-r" style="bottom: 2px;color: #9F9F9F">约</span>
+                                <span>{{product.text.split(":")[2]}}%</span>
+                            </p>
+                            <p class="font-16 styleTwo" style="padding-left: 20px ">日算力</p>
+                        </div>
+                        <div class="productList_right">
+                            <p class="styleFirst" style="color: #000;font-size: 20px;">{{product.text.split(":")[1]}}</p>
+                            <p class="font-16 styleTwo">固定节点有更多算力</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<!--<button class="pos-f login_button_fix"  ui-sref="pwdGesture">登录</button>-->
+<!--<button class="pos-f login_button_fix"  ng-click="vm.welComeLoginGoNativeBackParams('pwdGesture')">登录</button>-->
+
+<script>
+    $(function () {
+//        console.log($("#useID").val());
+
+        var input=$("input.number_input");
+        var inputWidth=$("input.number_input").width()+10;
+        var matWidth=$(".width_mat").width()+11;
+        if(matWidth<=190){
+            $(".cengtent").css({
+                "font-size":"12px"
+            })
+        }else {
+            $(".cengtent").css({
+                "font-size":"16px"
+            })
+        }
+        if(inputWidth<=141){
+            input.css({
+                "font-size":"18px"
+            });
+            $(".text_colr").css({
+                "font-size":"12px"
+            });
+            $(".posi_icon_left").css({
+                "font-size":"14px"
+            })
+        }
+        if(inputWidth>141&&inputWidth<=161){
+            input.css({
+                "font-size":"20px"
+            });
+            $(".text_colr").css({
+                "font-size":"14px"
+            });
+            $(".posi_icon_left").css({
+                "font-size":"16px"
+            })
+        }
+        if(inputWidth>161&&inputWidth<=180){
+            input.css({
+                "font-size":"22px"
+            });
+            $(".text_colr").css({
+                "font-size":"16px"
+            });
+            $(".posi_icon_left").css({
+                "font-size":"18px"
+            })
+        }
+        if(inputWidth>180&&inputWidth<=300){
+            input.css({
+                "font-size":"24px"
+            });
+            $(".text_colr").css({
+                "font-size":"18px"
+            });
+            $(".posi_icon_left").css({
+                "font-size":"20px"
+            })
+        }
+        if(inputWidth>300){
+            input.css({
+                "font-size":"30px"
+            });
+            $(".text_colr").css({
+                "font-size":"20px"
+            });
+            $(".posi_icon_left").css({
+                "font-size":"22px"
+            })
+        }
+    })
+</script>

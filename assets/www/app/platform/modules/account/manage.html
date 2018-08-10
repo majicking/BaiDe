@@ -1,0 +1,140 @@
+<ion-header-bar hide-tabs="false" id="s-header" class="bar-dblue" cache-view="false">
+    <h1 class="title1" style="color: #fff;font-weight: normal">我的</h1>
+</ion-header-bar>
+<ion-content class="bg-color">
+    <div style="background: #1b82d2;height: 20px;margin-top:-20px;"></div>
+    <div class="my-header-manage">
+        <img ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif'}}">
+        <input type="file" name="" nv-file-select="" uploader="imgUploader" multiple>
+        <img style="position: absolute;width: 25px;height: 25px;top: 50px;left: 71px;border: 1px solid rgba(255, 251, 240, 0.8);border-radius: 50%" src="app/platform/resources/img/header.png">
+        <div class="name">{{vm.model.name.charAt(0) + '**'}}</div>
+        <!--<div class="name" ng-if="vm.model.userType=='1'">{{vm.model.bizCredentialName}}</div>-->
+        <div class="username">{{vm.model.username}}</div>
+        <i class="ion-chevron-right bill-list-right3"></i>
+    </div>
+    <div class="list">
+        <div class="item item-icon-left item-icon-right" ng-click="goNativeBack('tab.manage-mobile')">
+            <i class="icon fa fa-mobile" style="color:grey;font-size: 31px;" ng-if="vm.model.isMobile==0"></i>
+            <i class="icon fa fa-mobile" style="color:#008fe0;font-size: 31px;" ng-if="vm.model.isMobile==1"></i>
+            <label class="font-15" style="position: relative;top: -1px;">手机号</label>
+            <div ng-if="vm.model.isMobile==0" class="item-note-red">
+                未设置
+            </div>
+            <div ng-if="vm.model.isMobile==1" class="item-note">
+                {{vm.model.mobile}}
+            </div>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+        <div class="item item-icon-left" ng-if="vm.model.userType=='0'&& vm.model.isQiYe =='0'">
+            <i class="icon iconfont icon-shimingxinxi" style="color:#cd4a06;font-size: 21px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">实名认证</label>
+            <div class="item-note">{{vm.model.name.charAt(0) + '**'}}(身份证尾号{{vm.model.idCard}})</div>
+        </div>
+        <div class="item item-icon-left" ng-if="vm.model.userType=='1' || vm.model.isQiYe =='1'">
+            <i class="icon iconfont icon-999999farenyingyezhizhaohao" style="color:#cd4a06; font-size: 21px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">法人实名</label>
+            <div class="item-note">{{vm.model.bizCredentialName}}(身份证尾号{{vm.model.bizCredentialNo}})</div>
+        </div>
+        <div class="item item-icon-left item-text-wrap" style="height: 80px;" ng-if="vm.model.userType=='1' || vm.model.isQiYe =='1'">
+            <i class="icon iconfont icon-gongsimingcheng" style="color: #0461A6; font-size: 21px;"></i>
+            <label class="font-15" style="position: relative;top: 9px;">公司名</label>
+            <div class="item-note" style="width: 160px;">{{vm.model.name}}</div>
+        </div>
+        <div class="item item-icon-left" ng-if="vm.model.userType=='1' || vm.model.isQiYe =='1'">
+            <i class="icon iconfont icon-yingyezhizhao" ng-if="vm.model.bizLicenseNo==null" style="color: grey; font-size: 20px;"></i>
+            <i class="icon iconfont icon-yingyezhizhao" ng-if="vm.model.bizLicenseNo!=null" style="color: #29ab91; font-size: 20px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">营业执照号</label>
+            <div ng-if="vm.model.bizLicenseNo==null" class="item-note-red">
+                未认证
+            </div>
+            <div ng-if="vm.model.bizLicenseNo!=null" class="item-note">
+                尾号{{vm.model.bizLicenseNo}}
+            </div>
+        </div>
+        <div class="item item-gap" style="border:none" ng-if="vm.model.userType=='1'"></div>
+        <div class="item item-icon-left item-icon-right" ng-if="vm.model.userType=='1'" ng-click="vm.display()">
+            <i class="icon iconfont icon-yonghuzhanghuguanli" style="font-size: 20px;color: #1b82d2;" ng-if="vm.bankTypeText!=null"></i>
+            <i class="icon iconfont icon-yonghuzhanghuguanli" style="font-size: 20px;color: grey" ng-if="vm.bankTypeText==null"></i>
+            <label class="font-15">账户选择</label>
+            <div ng-if="vm.bankTypeText==null" class="item-note-red">
+                请选择
+            </div>
+            <div ng-if="vm.bankTypeText!=null" class="item-note">
+                {{vm.bankTypeText}}
+            </div>
+            <i ng-class="{'icon iconfont ion-chevron-down icon-accessory':vm.flag==true, 'icon iconfont ion-chevron-right icon-accessory':vm.flag==false}"></i>
+        </div>
+        <div class="list" ng-show="vm.flag==true">
+            <div class="item withdraw item-icon-right" ng-click="vm.typeChanged(bankType.value)" ng-if="vm.flag==true" ng-repeat="bankType in vm.bankTypes">
+                <label>{{bankType.text}}</label>
+                <i class="icon balanced" ng-class="{'ion-ios-circle-outline':vm.bankTypeValue!=bankType.value,'ion-ios-checkmark-outline':vm.bankTypeValue==bankType.value}"></i>
+            </div>
+        </div>
+        <a class="item item-icon-left item-icon-right" ng-if="(vm.model.userType=='0'&&vm.model.isQiYe=='0')||vm.model.userType=='1'" ng-click="goNativeBack('tab.manage-bankcard-list')">
+            <i class="icon iconfont icon-yinxingqia" ng-if="vm.model.isNomalBank==0" style="font-size: 15px;color: grey"></i>
+            <i class="icon iconfont icon-yinxingqia" ng-if="vm.model.isNomalBank==1" style="color:#22bbe9;font-size: 15px;"></i>
+            <label class="font-15">银行卡</label>
+            <div ng-if="vm.model.isNomalBank==0" class="item-note-red">
+                未绑定
+            </div>
+            <div ng-if="vm.model.isNomalBank==1" class="item-note">
+                已绑定
+            </div>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" ng-if="vm.model.userType=='1' || vm.model.isQiYe =='1'" ng-click="goNativeBack('tab.manage-ent-bank')">
+            <i class="icon iconfont icon-zhanghuman" ng-if="vm.model.isEntBank==0" style="font-size: 20px;color: grey"></i>
+            <i class="icon iconfont icon-zhanghuman" ng-if="vm.model.isEntBank==1" style="color:#ffb415;font-size: 20px;"></i>
+            <label class="font-15">企业账户</label>
+            <div ng-if="vm.model.isEntBank==0" class="item-note-red">
+                未绑定
+            </div>
+            <div ng-if="vm.model.isEntBank==1" class="item-note">
+                已绑定
+            </div>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+        <div class="item item-gap" style="border:none"></div>
+        <!--<div class="item item-icon-left item-icon-right" style="border: none" ng-click="goNativeBack('tab.manage-user-graph')">-->
+            <!--<i class="icon iconfont icon-fenbushiguanxixingshujukuDRDS" style="color: #ff9800; font-size: 22px;"></i>-->
+            <!--<label class="font-15" style="position: relative;top: -1px;">我的推荐</label>-->
+            <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+        <!--</div>-->
+        <div class="item item-icon-left item-icon-right" style="border: none" ng-show="vm.memberBill" ng-click="goNativeBack('tab.manage-member-graph')">
+            <i class="icon iconfont icon-fenbushiguanxixingshujukuDRDS" style="color: #ff9800; font-size: 22px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">报单中心</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+        <div class="item item-icon-left item-icon-right" style="border: none" ng-show="!vm.memberBill" ng-click="vm.applyForDeclaration()">
+            <i class="icon iconfont icon-fenbushiguanxixingshujukuDRDS" style="color: #ff9800; font-size: 22px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">申请报单中心</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+        <div class="item item-gap" style="border: none"></div>
+        <a class="item item-icon-left item-icon-right" style="border-top: none" ng-click="goNativeBack('tab.manage-password')">
+            <i class="icon iconfont ion-android-lock" style="color: #22bbe9; font-size: 26px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">修改登录密码</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" ng-click="goNativeBack('tab.manage-repayment')">
+            <i class="icon iconfont ion-locked" style="color: #22ca3f; font-size: 23px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">修改交易密码</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right hidden" style="border-bottom: none" ng-click="goNativeBack('tab.manage-pattern')">
+            <i class="icon iconfont icon-xiugaishoushimima iconfont" style="color: #0E96FF; font-size: 26px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">手势密码管理</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right" style="border-bottom: none" ng-click="vm.functionConstruction()">
+            <i class="icon iconfont icon-xiugaishoushimima iconfont" style="color: #0E96FF; font-size: 26px;"></i>
+            <label class="font-15" style="position: relative;top: -1px;">手势密码管理</label>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+    </div>
+    <div class="padding">
+        <button class="button button-block button-dblue" ng-click="vm.logout()">
+            安全退出
+        </button>
+    </div>
+</ion-content>

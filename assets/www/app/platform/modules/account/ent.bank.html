@@ -1,0 +1,81 @@
+<ion-view hide-tabs="true" view-title="企业账户" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.manage')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="list">
+            <div class="item item-input">
+                <span class="input-label" style="font-weight: normal">开户名</span>
+                <div>{{vm.model.name}}</div>
+            </div>
+            <div class="item item-input item-icon-right write">
+                <span class="input-label" style="font-weight: normal">账号<em style="color:#fff;">白</em></span>
+                <input type="text"
+                       placeholder="企业账号"
+                       ng-keyup="writeClear($event, 'write');vm.inputCard()"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.bankAccountNumber">
+                <i class="icon ion-close-circled input-del-entBank" style="padding-top: 3px;right: -5px;font-size: 15px;" ng-click="vm.model.bankAccountNumber=''"></i>
+            </div>
+            <div class="item item-gap" style="border: 0.5px solid #DDDDDD"></div>
+            <div class="item item-input item-icon-right write">
+                <span class="input-label" style="font-weight: normal">银行名</span>
+                <input type="text"
+                       placeholder="开户银行名"
+                       ng-keyup="writeClear($event, 'write');vm.inputCard()"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.bankName">
+                <i class="icon ion-close-circled input-del-entBank" style="padding-top: 3px;right: -5px;font-size: 15px;" ng-click="vm.model.bankName=''"></i>
+            </div>
+            <div class="item item-input item-icon-right write">
+                <span class="input-label" style="font-weight: normal">支行名</span>
+                <input type="text"
+                       placeholder="开户支行名"
+                       ng-keyup="writeClear($event, 'write');vm.inputCard()"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.branchName">
+                <i class="icon ion-close-circled input-del-entBank" style="padding-top: 3px;right: -5px;font-size: 15px;" ng-click="vm.model.branchName=''"></i>
+            </div>
+            <div class="item item-input item-icon-right write">
+                <span class="input-label" style="font-weight: normal">联行号</span>
+                <input type="text"
+                       placeholder="支行联行号"
+                       ng-keyup="writeClear($event, 'write');vm.inputCard()"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.bankUnionCode">
+                <i class="icon ion-close-circled input-del-entBank" style="padding-top: 3px;right: -5px;font-size: 15px;" ng-click="vm.model.bankUnionCode=''"></i>
+            </div>
+            <div class="item item-gap" style="border: 0.5px solid #DDDDDD"></div>
+            <label class="item item-input item-select">
+                <div class="input-label" style="font-weight: normal">开户行所在省</div>
+                <select ng-model="vm.model.bankProvince" ng-change="vm.provinceChanged()">
+                    <option value="{{province.value}}" ng-repeat="province in vm.provinceList" ng-selected="vm.model.bankProvince==province.value">{{province.text}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label" style="font-weight: normal">开户行所在市</div>
+                <select ng-model="vm.model.bankCity" ng-change="vm.cityChanged()">
+                    <option value="{{city.value}}" ng-repeat="city in vm.cityList" ng-selected="vm.model.bankCity==city.value" >{{city.text}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label" style="font-weight: normal">开户行所在区</div>
+                <select ng-model="vm.model.bankDistrict">
+                    <option value="{{district.value}}" ng-repeat="district in vm.districtList" ng-selected="vm.model.bankDistrict==district.value">{{district.text}}</option>
+                </select>
+            </label>
+        </div>
+        <div class="padding" style="padding-bottom:0px; font-size: 12px;color: #96ABBB;">
+            为保证及时到账，请填写真实的企业账户信息
+        </div>
+        <div class="padding">
+            <button class="button button-block button-dblue" ng-click="vm.save()">保存</button>
+        </div>
+    </ion-content>
+</ion-view>

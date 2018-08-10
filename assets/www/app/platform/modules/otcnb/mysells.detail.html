@@ -1,0 +1,214 @@
+<style>
+    .pane{
+        background: #f5f5f5 !important;
+    }
+    .my-header-manage1 {
+        height: 185px;
+        position: relative;
+        z-index: 0;
+        background-color: white;
+    }
+    .my-header-manage1 img {
+        position: absolute;
+        width: 215px;
+        height: 165px;
+        border-radius: 10%;
+        right: 20px;
+        border: 2px solid rgba(255, 251, 240, 0.5);
+        margin-top: 10px;
+    }
+    .my-header-manage1 input {
+        z-index: 99;
+        display: block;
+        border: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .my-header-manage1 label{
+        position: absolute;
+        font-weight: normal;
+        font-size: 16px;
+        margin-top: 20%;
+        margin-left: 15px;
+    }
+    .mysells-detail__state{
+        font-family: MicrosoftYaHei;
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #808080;
+        min-width: 48px;
+    }
+    .mysells-detail__icon{
+        margin-bottom: 4px;
+        font-size: 1.6875rem;
+        color: #999;
+    }
+    .mysells-detail__iconed{
+        font-size: 2.5rem !important;
+        color: #7bbc52 !important;
+    }
+    .mysells-detail__d{
+        font-size: 13px;
+        color: #808080;
+        /*margin: 0px 4px;*/
+        width: 1.4735rem;
+        min-width: 1.1rem;
+        height: 0.125rem;
+        background: url("app/platform/resources/img/otc/d.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: 100% 100%;
+        margin-bottom: 1.25rem;
+        /*margin: 0 .25rem 1.25rem .625rem;*/
+        margin: 0 0.4rem 1.25rem;
+    }
+    .mysells-state__box{
+        background: #fff;
+        padding:1.875rem 2.0625rem 1.125rem 1.875rem;
+    }
+</style>
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="vm.pageNative()">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}}" style="color: #fff;font-size: 30px;"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <div class="list">
+        <div class="f mysells-state__box f-ac f-sa" style="border-bottom: 0.5px solid #DDDDDD;position: relative;z-index: 999" >
+            <div class="f f-dc f-ac f-c">
+                <p><i class="iconfont mysells-detail__icon" ng-class="'挂单中' == vm.otcCurrentState ? 'mysells-detail__iconed icon-guaDaned' : 'icon-guaDan'"></i></p>
+                <p class="mysells-detail__state f-ac f-c">挂单中</p>
+            </div>
+            <div class="mysells-detail__d"></div>
+            <div class="f f-dc f-ac f-c">
+                <p><i class="iconfont mysells-detail__icon" ng-class="'交易中' == vm.otcCurrentState ? 'mysells-detail__iconed icon-tradeinged' : 'icon-tradeing'"></i></p>
+                <p class="mysells-detail__state f-ac f-c">交易中</p>
+            </div>
+            <div class="mysells-detail__d"></div>
+            <div class="f f-dc f-ac f-c">
+                <p><i class="iconfont mysells-detail__icon" ng-class="'已付款' == vm.otcCurrentState ? 'mysells-detail__iconed icon-accountPaided' : 'icon-accountPaid'"></i></p>
+                <p class="mysells-detail__state f-ac f-c">已付款</p>
+            </div>
+            <div class="mysells-detail__d"></div>
+            <div class="f f-dc f-ac f-c">
+                <p><i class="iconfont  mysells-detail__icon" ng-class="'交易完成' == vm.otcCurrentState ? 'mysells-detail__iconed icon-tradeFinished' : 'icon-tradeFinish'"></i></p>
+                <p class="mysells-detail__state f-ac f-c">交易完成</p>
+            </div>
+        </div>
+        <div class="item-gap" ng-show="vm.pageElementCon.isCurrentUser"></div>
+        <div class="item f-sb" style="border-top: none" ng-show="vm.pageElementCon.isCurrentUser">
+            <label style="font-weight: normal;">挂单人姓名</label>
+            <div class="item-note-grey">{{vm.input.createrUserName}}</div>
+        </div>
+        <div class="item f-sb" style="border-bottom: none" ng-show="vm.pageElementCon.isCurrentUser">
+            <label style="font-weight: normal;">挂单人电话</label>
+            <div class="item-note-grey">{{vm.input.createrUserMobile}}</div>
+        </div>
+        <div class="item-gap" ng-show="vm.pageElementCon.isCreaterUser"></div>
+        <div class="item f-sb" style="border-top: none" ng-show="vm.pageElementCon.isCreaterUser">
+            <label style="font-weight: normal;">交易人姓名</label>
+            <div class="item-note-grey">{{vm.input.currentUserName}}</div>
+        </div>
+        <div class="item f-sb" style="border-bottom: none" ng-show="vm.pageElementCon.isCreaterUser">
+            <label style="font-weight: normal;">交易人电话</label>
+            <div class="item-note-grey">{{vm.input.currentUserMobile}}</div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item f-sb">
+            <label style="font-weight: normal;">单号</label>
+            <div class="item-note-grey">{{vm.input.sn}}</div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item f-sb">
+            <label style="font-weight: normal;">单价</label>
+            <div class="item-note-orange font-14">{{vm.input.sellOnePrice}}</div>
+        </div>
+        <div class="item f-sb">
+            <label style="font-weight: normal;">数量</label>
+            <div class="item-note-dblue">{{vm.input.sellAmount}}</div>
+        </div>
+        <div class="item f-sb">
+            <label style="font-size: 16px">总价</label>
+            <div class="item-note-orange">{{vm.input.totalPrice}}</div>
+        </div>
+        <div class="item-gap" ng-show="vm.pageElementCon.isBankMoneyOrder"></div>
+        <!--<div class="my-header-manage1" style="border: none" ng-show="vm.pageElementCon.isBankMoneyOrder">-->
+            <!--<label>银行汇票</label>-->
+            <!--<img ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif'}}">-->
+            <!--&lt;!&ndash;<input type="file" name="" nv-file-select="" uploader="imgUploader" multiple>&ndash;&gt;-->
+        <!--</div>-->
+        <div class="item item-icon-right" style="z-index:0;border: none" ng-show="vm.pageElementCon.isBankMoneyOrder">
+            <!--<input type="file" name="" nv-file-select="" uploader="imgUploader" ng-show="vm.pageElementCon.isCanUpdate" style="z-index:99;display:block; border: none;position: absolute;left: 0;top: 0;opacity: 0;width: 100%;height: 100%;" multiple >-->
+            <label class="font-15" style="position: relative;top: -1px;">打款凭证</label>
+            <!--<div class="item-note">-->
+            <!--<img style="border-radius: 50%;" width="30px" height="30px" ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/logo.gif'}}">-->
+            <!--</div>-->
+            <i class="icon ion-chevron-right icon-accessory" style="width: 50px;padding-left: 18px">
+                <img style="border-radius: 10%;position: absolute;right: 50px;top: 4px;width: 45px;height: 45px;" ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/wait.jpg'}}" ng-click="showBigImage(vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/wait.jpg')">
+                <!--<img style="border-radius: 5%;position: absolute;right: 50px;top: 4px;width: 45px;height: 45px;" ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif'}}">-->
+            </i>
+        </div>
+
+
+        <div class="item-gap" ng-show="vm.pageElementCon.isOptions"></div>
+        <div class="item item-input item-stacked-label withdraw write" ng-show="vm.pageElementCon.isOptions">
+            <span class="input-label withdraw" style="font-weight: normal;">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.payPassword"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px" ng-click="vm.input.payPassword=''"></i>
+        </div>
+    </div>
+    <div style="text-align: left; margin-left: 10px; margin-top: 10px;font-size: 13px;color: #96ABBB;" ng-show="vm.input.tradeCount != null&&vm.input.tradeCount != 0">
+        每天卖出操作不得大于 {{vm.input.tradeCount}} 次
+    </div>
+    <div class="padding-horizontal" ng-show="vm.pageElementCon.optionBtns">
+        <button class="button button-block button-dgreen" ng-click="vm.confirmComplet()" ng-show="vm.pageElementCon.optionBtns.confirmComplet">
+            交易完成
+        </button>
+
+        <button class="button button-block button-assertive" ng-click="vm.cancelSell()" ng-show="vm.pageElementCon.optionBtns.cancelSell">
+            取消挂单
+        </button>
+
+        <button class="button button-block button-assertive" ng-click="vm.cancelBuy()" ng-show="vm.pageElementCon.optionBtns.cancelDeal">
+            取消交易
+        </button>
+    </div>
+</ion-content>
+<com-image-box></com-image-box>

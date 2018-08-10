@@ -1,0 +1,209 @@
+<!-- 2018.04.12 by zl -->
+<ion-view view-title="算力中心" hide-tabs="false" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <!--<ion-nav-buttons side="left">-->
+            <!--<button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.account')"></button>-->
+        <!--</ion-nav-buttons>-->
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <ion-refresher on-refresh="vm.doRefresh()"
+                       pulling-text="下拉刷新"
+                       refreshing-text="刷新中..."
+                       refreshing-icon="ion-loading-b">
+        </ion-refresher>
+        <!--<div class="item item-gap"></div>-->
+        <!--总资产-->
+        <div class="item item-icon-left item-icon-right header_bgcolor_blue f f-sb" style="border-top:none;border-bottom:0.5px solid #DDDDDD;padding:10px 20px !important; ">
+            <!--<i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>-->
+            <div class="col-50 height_fixation f-dc">
+                <div class="f f-fs font-16 f-ac" style="color: rgb(141, 193, 232);">
+                    <span>总资产</span>
+                    <i class="iconfont icon-anquanshezhi1 text_colr" style="margin-left:10px;margin-right: 3px"></i>
+                    <span class="text_colr">保障中</span></label>
+                </div>
+                <input type="text" class="number_input" readonly="readonly" value="{{ vm.model.total}}"/>
+                <!--<span class="number_span font-30">123,000,001.00</span>-->
+                <!--<div class="font-12" style="position: relative;top: -1px;color: #ffffff">买卖灵活 收益天天算</div>-->
+            </div>
+            <div class="f f-fs col-50 height_fixation">
+                <div style="padding-left: 20px">
+                    <div class="f f-fs f-ac font-16" style="color: rgb(141, 193, 232);">
+                        <span>昨日收益</span>
+                        <i class="iconfont icon-jifen font-14 list-icon"></i>
+                    </div>
+                    <!--<div class="font-12" style="position: relative;top: -1px;color: #ffffff">买卖灵活 收益天天算</div>-->
+                    <input type="text" class="number_input" readonly="readonly" value="{{vm.model.ydayInterestTotal}}"/>
+                </div>
+                <!--<div class="right_icon iconfont ion-chevron-right "></div>-->
+            </div>
+
+        </div>
+        <!--临时、固定-->
+        <div class="matters_content">
+            <div class="f">
+                <div class="floatLeft border_bottom height_fitd f-ac border_right">
+                    <i class="icon iconfont icon-jiedianjinduliebiaotuan dblue font-18 list-icon" style="margin-right: 5px"></i>
+                    临时节点
+                </div>
+                <div class="floatLeft border_bottom height_fitd f-ac">
+                    <i class="icon iconfont icon-jiedianliebiao balanced font-18 list-icon" style="margin-right: 5px"></i>
+                    固定节点
+                </div>
+                <!--<div class="floatLeft border_bottom height_fitd" ng-click="goNativeBackParams('tab.account-qrcodel')">固定</div>-->
+            </div>
+            <div class="float_for width_mat border_bottom border_right">
+                <div class="cengtent text_left font-18">昨日</div>
+                <div class="cengtent text_right font-18 item-note-orange">{{vm.model.ydayInterestTemporary}}</div>
+                <div class="posi_icon_left iconfont ion-ios-information hidden"></div>
+            </div>
+            <div class="float_for width_mat border_bottom">
+                <div class="cengtent text_left">昨日</div>
+                <div class="cengtent text_right item-note-orange">{{vm.model.ydayInterestFixed}}</div>
+                <div class="posi_icon_left iconfont ion-ios-information hidden"></div>
+            </div>
+            <div class="float_for width_mat border_right">
+                <div class="cengtent text_left">累积</div>
+                <div class="cengtent text_right item-note-orange">{{vm.model.temporaryInterestTotal}}</div>
+                <div class="posi_icon_left iconfont ion-ios-information hidden"></div>
+            </div>
+            <div class="float_for width_mat">
+                <div class="cengtent text_left">累积</div>
+                <div class="cengtent text_right item-note-orange">{{vm.model.fixedInterestTotal}}</div>
+                <div class="posi_icon_left iconfont ion-ios-information hidden"></div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="item item-gap"></div>
+        <!--活期理财-->
+        <div class="list-financing">
+            <div class="item item-icon-left item-icon-right" style="border-top:none;border-bottom:0.5px solid #DDDDDD;padding-top: 10px; padding-bottom:10px; position: relative; padding-left: 30px !important;">
+                <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>
+                <label class="font-18" style="position: relative;top: 1px;"><b>临时节点</b></label>
+                <span class="font-14" style="padding-left: 10px">算力管家&nbsp灵活进出</span>
+                <!--<div class="font-14" style="position: relative;top: -1px;color: #666">安心资产 收益领跑</div>
+                <div class="click_more"><span class="span_more">更多</span><span class="iconfont ion-chevron-right"></span></div>-->
+            </div>
+            <div class="list" style="background-color:#fff;">
+                <ul class="product_ulList">
+                    <li ng-repeat="product in vm.model.temporary.list" ng-click="goNativeBackParams('tab.product-roll-in', {subAccountType:'1002',tradeType:product.value})">
+                        <div class="productList_left">
+                            <p class="styleFirst" style="color: #F75155">
+                                <span class="font-16 interest_span pos-r" style="bottom: 2px;color: #9F9F9F">约</span>
+                                <span class="interest_span">{{product.text.split(":")[2]}}%</span>
+                            </p>
+                            <p class="font-16 styleTwo" style="padding-left: 20px ">日算力</p>
+                        </div>
+                        <div class="productList_right">
+                            <!--<p class="styleFirst" style="color: #000;font-size: 20px;">{{product.text.split(":")[1]}}</p>-->
+                            <p class="styleFirst" style="color: #000;font-size: 20px;">{{product.text.split(":")[1]}}</p>
+                            <p class="font-16 styleTwo">临时节点有更多算力</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="item item-gap"></div>
+        <!--固定期限-->
+        <div  class="list-financing">
+            <div class="item item-icon-left item-icon-right" style="border-top:none;border-bottom:0.5px solid #DDDDDD;padding-top: 10px; padding-bottom:10px; position: relative; padding-left: 30px !important;">
+                <i class="icon iconfont icon-window-minimize" style="font-size: 25px;color: #1b82d2;"></i>
+                <label class="font-18" style="position: relative;top: 1px;"><b>固定节点</b></label>
+                <span class="font-14" style="padding-left: 10px">安全省心&nbsp算力更多</span>
+                <!--<div class="font-14" style="position: relative;top: -1px;color: #666">安心资产 收益领跑</div>
+                <div class="click_more"><span class="span_more">更多</span><span class="iconfont ion-chevron-right"></span></div>-->
+            </div>
+            <div class="list" style="background-color:#fff;">
+                <ul class="product_ulList">
+                    <li ng-repeat="product in vm.model.fixed.list"
+                        ng-click="goNativeBackParams('tab.product-roll-in', {subAccountType:'1002',tradeType:product.value})">
+                        <div class="productList_left">
+                            <p class="styleFirst" style="color: #F75155">
+                                <span class="font-16 pos-r" style="bottom: 2px;color: #9F9F9F">约</span>
+                                <span>{{product.text.split(":")[2]}}%</span>
+                            </p>
+                            <p class="font-16 styleTwo" style="padding-left: 20px ">日算力</p>
+                        </div>
+                        <div class="productList_right">
+                            <p class="styleFirst" style="color: #000;font-size: 20px;">{{product.text.split(":")[1]}}</p>
+                            <p class="font-16 styleTwo">固定节点有更多算力</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
+<script>
+$(function () {
+    var input=$("input.number_input");
+    var inputWidth=$("input.number_input").width()+10;
+    var matWidth=$(".width_mat").width()+11;
+    if(matWidth<=190){
+        $(".cengtent").css({
+            "font-size":"12px"
+        })
+    }else {
+        $(".cengtent").css({
+            "font-size":"14px"
+        })
+    }
+    if(inputWidth<=141){
+        input.css({
+            "font-size":"18px"
+        });
+        $(".text_colr").css({
+            "font-size":"8px"
+        });
+        $(".posi_icon_left").css({
+            "font-size":"14px"
+        })
+    }
+    if(inputWidth>141&&inputWidth<=161){
+        input.css({
+            "font-size":"20px"
+        });
+        $(".text_colr").css({
+            "font-size":"10px"
+        });
+        $(".posi_icon_left").css({
+            "font-size":"16px"
+        })
+    }
+    if(inputWidth>161&&inputWidth<=180){
+        input.css({
+            "font-size":"22px"
+        });
+        $(".text_colr").css({
+            "font-size":"12px"
+        });
+        $(".posi_icon_left").css({
+            "font-size":"18px"
+        })
+    }
+    if(inputWidth>180&&inputWidth<=300){
+        input.css({
+            "font-size":"24px"
+        });
+        $(".text_colr").css({
+            "font-size":"14px"
+        });
+        $(".posi_icon_left").css({
+            "font-size":"20px"
+        })
+    }
+    if(inputWidth>300){
+        input.css({
+            "font-size":"30px"
+        });
+        $(".text_colr").css({
+            "font-size":"20px"
+        });
+        $(".posi_icon_left").css({
+            "font-size":"22px"
+        })
+    }
+})
+</script>

@@ -1,0 +1,62 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-icon-sm button-clear" style="left: 2px;font-size: 15px" ng-if="vm.back=='account'" ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(':')[3], {subAccountType:vm.subAccountType})">完成</div>
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;font-size: 15px" ng-if="vm.back=='list'" ng-click="goNativeBackParams('tab.account-bill-list', {subAccountType:vm.subAccountType})"></div>
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">结果详情</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <div class="item item-body" ng-show="vm.showPage">
+        <div class="cd-container cd-timeline">
+            <div ng-class="{'cd-timeline-result1 transfer-line':vm.model.state=='00'||vm.model.state=='01','cd-timeline-result2':vm.model.state=='02','cd-timeline-result3':vm.model.state=='03'}">
+                <div class="cd-timeline-block">
+                    <div class="cd-timeline-icon cd-info-blue">
+                        <i class="icon ion-checkmark-round"></i>
+                    </div>
+                    <div class="cd-timeline-content">
+                        <div class="cd-title cd-info-blue">转账申请已提交</div>
+                        <span class="cd-date" style="display: block;float: none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">转账用户&nbsp;&nbsp;({{vm.model.fromName}})【{{vm.model.subAccountTypeName}}】</span>
+                        <span class="cd-date">{{vm.model.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    </div>
+                </div>
+                <div ng-class="{'cd-timeline-result4':vm.model.state=='03'}"></div>
+                <div class="cd-timeline-block">
+                    <div class="cd-timeline-icon" ng-class="{'cd-warning':vm.model.state=='00'||vm.model.state=='01','cd-info-blue':vm.model.state=='02','cd-error':vm.model.state=='03'}">
+                        <i class="icon" ng-class="{'iconfont icon-time font-22':vm.model.state=='00'||vm.model.state=='01','iconfont icon-icon_rotate font-22':vm.model.state=='02','ion-close':vm.model.state=='03'}"></i>
+                    </div>
+                    <div class="cd-timeline-content">
+                        <div class="cd-title cd-info-blue" ng-if="vm.model.state=='02'&&vm.model.type=='1'">转账完成(即时到账)</div>
+                        <div class="cd-title cd-info-blue" ng-if="vm.model.state=='02'&&vm.model.type=='2'">转账完成</div>
+                        <div class="cd-title cd-error" ng-if="vm.model.state=='03'">处理失败时间</div>
+                        <div class="cd-title" ng-if="vm.model.state=='00'||vm.model.state=='01'" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">预计完成(以具体处理时间为准)</div>
+                        <span class="cd-date" style="display: block;float: none;	white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">转出对象&nbsp;&nbsp;({{vm.model.toName}})</span>
+                        <span class="cd-date">{{vm.model.finishedTime | date:'yyyy-MM-dd HH:mm:ss'}}&nbsp;&nbsp;{{vm.model.dateLabel}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

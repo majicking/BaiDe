@@ -1,0 +1,58 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="bar-dblue" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBack('tab.account')">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">市场走势</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="button button-icon-sm button-clear icon iconfont icon-jilu header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="bg-color">
+    <div class="list">
+        <div class="item item-icon-left item-icon-right" style="border: none">
+            <i class="icon iconfont icon-ruhetigaodengjifen" style="font-size: 25px;color: #1b82d2;"></i>
+            <label class="font-17">余额账户</label>
+            <i class="icon ion-chevron-right icon-accessory" style="width: 50px;padding-left: 18px;color: #fff">
+                <div class="tags-price" style="">
+                    <span class="jia_ge_die" ng-if="vm.model.upDown=='0'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_zhang" ng-if="vm.model.upDown=='1'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_gain" ng-if="vm.model.upDown=='2'">{{vm.model.rate}}%</span>
+                </div>
+                <div class="item-note-price font-17">{{vm.model.market|number:2}}</div>
+            </i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item f-sb market-ga" style="border: none">
+            <!--<div class="tab_div" ><span>零点开盘</span><br><span class="price_color">{{vm.model.zeroPrice}}</span></div>-->
+            <div class="f-ac f-dc"><span>最高</span><span class="price_color">{{vm.model.highestPrice}}</span></div>
+            <div class="f-ac f-dc"><span>最低</span><span class="price_color">{{vm.model.lowestPrice}}</span></div>
+            <div class="f-ac f-dc"><span>成交量</span><span class="price_color">{{vm.model.turnoverTotal}}</span></div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item f-sb market" style="border: none" id="div_period">
+            <div class="market-title f-ac f-c" ng-class="{ 'market-active':vm.defaultColor == $index+1 }" ng-repeat="item in vm.title" ng-click="vm.doRefreshChart($index+1)">{{ item.name }}</div>
+            <div class="otcTab-dl" ng-style="vm.translatex"></div>
+        </div>
+        <div id="div_trend" class="item" style="height:400px;"></div>
+    </div>
+</ion-content>

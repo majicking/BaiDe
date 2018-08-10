@@ -1,0 +1,263 @@
+.tags {
+    font-size: .625rem;
+    padding-top: .1575rem;
+    float:right;
+}
+
+.tags1 {
+    font-size: .625rem;
+    padding-top: .2875rem;
+    float:right;
+}
+
+.tags-price {
+    position: absolute;
+    right: 0px;
+    top: 13px;
+    z-index: 99;
+    font-size: .625rem;
+    /*padding-top: .2875rem;*/
+    float:right;
+}
+
+.tags span {
+    border-radius: 1px;
+    padding: .125rem .725rem;
+    border: 1px solid;
+    line-height: .95rem;
+    float: left;
+    font-size: .95rem;
+    -webkit-transform: scale(.85);
+    -ms-transform: scale(.85);
+    transform: scale(.85)
+}
+
+.tags1 span {
+    border-radius: 3px;
+    /*background-color:#00aaee;*/
+    /*color: #ffffff;*/
+    padding: .125rem .125rem;
+    /*border: 1px solid;*/
+    line-height: .75rem;
+    float: left;
+    font-size: .75rem;
+    -webkit-transform: scale(.85);
+    -ms-transform: scale(.85);
+    transform: scale(.85)
+}
+
+.tags-price span {
+    border-radius: 4px;
+    /*background-color:#00aaee;*/
+    /*color: #ffffff;*/
+    padding: 5px 14px 4px 14px;
+    /*border: 1px solid;*/
+    /*line-height: 18px;*/
+    float: left;
+    font-size: 20px;
+    -webkit-transform: scale(.85);
+    -ms-transform: scale(.85);
+    transform: scale(.85)
+}
+
+.tags-price .jia_ge_zhang {
+    /*border-color: #00aaee;*/
+    background-color: #f35833;
+    color: #fff;
+}
+
+.tags-price .jia_ge_gain {
+    /*border-color: #00aaee;*/
+    background-color: gainsboro;
+    color: #fff;
+}
+
+.tags-price .jia_ge_die {
+    /*border-color: #00aaee;*/
+    background-color: #07a168;
+    color: #fff;
+}
+
+.tags1 .nian_hua {
+     /*border-color: #00aaee;*/
+    background-color: #00aaee;
+    color: #fff;
+ }
+
+.tags .xiang_xi {
+    border-color: #00aaee;
+    color: #00aaee;
+    width: 100%;
+}
+
+.tags1 .hong_li {
+    /*border-color: #FF0033;*/
+    background-color: #FF0033;
+    color: #fff;
+}
+
+.tags1 .ji_jin {
+    /*border-color: #CC6600;*/
+    background-color: #CC6600;
+    color: #fff;
+}
+
+.tags1 .yong_jin {
+    /*border-color: #009966;*/
+    background-color: #009966;
+    color: #fff;
+}
+
+.tags .du_jia {
+    border-color: #333399;
+    color: #333399;
+}
+
+.tags .jiang_jia {
+    border-color: #339933;
+    color: #339933;
+}
+
+.tags .xin_shang {
+    border-color: #0066CC;
+    color: #0066CC;
+}
+
+.tags .bu_xian_gou {
+    border-color: #000000;
+    color: #000000;
+}
+
+.article-list .tags {
+    font-size: .625rem;
+    margin-top: .125rem;
+    overflow: hidden;
+    height: 1.0625rem;
+}
+
+.article-list .tags span {
+    margin-right: .3125rem;
+    margin-bottom: .125rem;
+    font-size: .6875rem;
+    line-height: .9375rem;
+    padding: 0 .21875rem;
+    /*background-color: #f4f7f9;*/
+    /*color: #849aae;*/
+    border: none;
+    transform: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+}
+
+.article-list .tags .tag-0, .article-list .tags .tag-3, .article-list .tags .tag-6, .article-list .tags .tag-9, .article-list .tags .tag-12 {
+    color: #7cb7dd;
+    background-color: #e0eef7;
+}
+
+.article-list .tags .tag-1, .article-list .tags .tag-4, .article-list .tags .tag-7, .article-list .tags .tag-10, .article-list .tags .tag-13 {
+    color: #00ae66;
+    background-color: #e5f7ef;
+}
+
+.article-list .tags .tag-2, .article-list .tags .tag-5, .article-list .tags .tag-8, .article-list .tags .tag-11, .article-list .tags .tag-14 {
+    color: #fd7d00;
+    background-color: #f7eedf;
+}
+
+.article .tags {
+    font-size: .625rem;
+    margin-top: .125rem;
+    overflow: hidden;
+    height: 1.0625rem;
+}
+
+.article .tags span {
+    margin-bottom: .125rem;
+    font-size: .9rem;
+    line-height: 1.1rem;
+    padding: 0 .21875rem;
+    border: none;
+    transform: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+}
+
+.article .tags .tag-0, .article .tags .tag-3, .article .tags .tag-6, .article .tags .tag-9, .article .tags .tag-12 {
+    color: #7cb7dd;
+    background-color: #e0eef7;
+}
+
+.article .tags .tag-1, .article .tags .tag-4, .article .tags .tag-7, .article .tags .tag-10, .article .tags .tag-13 {
+    color: #00ae66;
+    background-color: #e5f7ef;
+}
+
+.article .tags .tag-2, .article .tags .tag-5, .article .tags .tag-8, .article .tags .tag-11, .article .tags .tag-14 {
+    color: #fd7d00;
+    background-color: #f7eedf;
+}
+
+.loupan-list .tags {
+    font-size: .625rem;
+    margin-top: .125rem;
+    overflow: hidden;
+    height: 1.0625rem;
+}
+
+.loupan-list .tags span {
+    margin-right: .3125rem;
+    margin-bottom: .125rem;
+    font-size: .6875rem;
+    line-height: .9375rem;
+    padding: 0 .21875rem;
+    background-color: #f4f7f9;
+    color: #849aae;
+    border: none;
+    transform: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+}
+
+.loupan-list .tags .tag-0, .loupan-list .tags .tag-3, .loupan-list .tags .tag-6, .loupan-list .tags .tag-9, .loupan-list .tags .tag-12 {
+    color: #7cb7dd
+}
+
+.loupan-list .tags .tag-1, .loupan-list .tags .tag-4, .loupan-list .tags .tag-7, .loupan-list .tags .tag-10, .loupan-list .tags .tag-13 {
+    color: #35aa7f
+}
+
+.loupan-list .tags .tag-2, .loupan-list .tags .tag-5, .loupan-list .tags .tag-8, .loupan-list .tags .tag-11, .loupan-list .tags .tag-14 {
+    color: #fd7d00
+}
+
+.funding-list .tags {
+    font-size: .625rem;
+    /*margin-top: .125rem;*/
+    overflow: hidden;
+    /*height: 1.0625rem;*/
+}
+
+.funding-list .tags span {
+    border-radius: .25em;;
+    float: right;
+    padding: 3px 6px 3px 6px;
+    border: none;
+    transform: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+}
+
+.funding-list .tags .tag-2{
+    background-color: #00ae66;
+    color: #ffffff
+}
+
+.funding-list .tags .tag-1 {
+    background-color: #fd7d00;
+    color: #ffffff
+}
+
+.funding-list .tags .tag-0 {
+    background-color: #999999;
+    color: #ffffff
+}

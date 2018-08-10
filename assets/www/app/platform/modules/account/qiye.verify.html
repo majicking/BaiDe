@@ -1,0 +1,60 @@
+<ion-view view-title="企业认证" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="right">
+            <button class="button button-clear" ui-sref="verify">个人</button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="list">
+            <div class="item item-icon-left item-icon-right write">
+                <i class="icon iconfont icon-999999farenyingyezhizhaohao" style="color:#666;font-size: 26px;"></i>
+                <input type="text"
+                       placeholder="法人名"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.bizCredentialName">
+                <i class="icon ion-close-circled input-del-verify" style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.model.bizCredentialName=''"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right write">
+                <i class="icon iconfont icon-shimingxinxi" style="color:#666;font-size: 24px"></i>
+                <input type="text"
+                       placeholder="法人证件号"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.idCard">
+                <i class="icon ion-close-circled input-del-verify" style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.model.idCard=''"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right write">
+                <i class="icon iconfont icon-gongsimingcheng" style="color:#666;font-size: 24px"></i>
+                <input type="text"
+                       placeholder="公司名"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.name">
+                <i class="icon ion-close-circled input-del-verify" style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.model.name=''"></i>
+            </div>
+            <div class="item item-icon-left item-icon-right write">
+                <i class="icon iconfont icon-yingyezhizhao" style="color:#666;font-size: 24px"></i>
+                <input type="text"
+                       placeholder="营业执照号"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.model.bizLicenseNo">
+                <i class="icon ion-close-circled input-del-verify" style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.model.bizLicenseNo=''"></i>
+            </div>
+        </div>
+        <div class="padding-top padding-horizontal">
+            <button class="button button-block button-dblue" ng-click="vm.verify()">
+                认证
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

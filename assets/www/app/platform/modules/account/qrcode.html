@@ -1,0 +1,31 @@
+<ion-view view-title="邀请码" hide-tabs="true" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.account')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="list card" style="top: 20px;border-radius: 1%;">
+            <div class="item dark" style="border-width:0px">
+                <img ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif'}}">
+                <div class="rcode  f-sb">
+                    <div class="font-19">{{vm.model.code}}</div>
+                    <div style="margin-right: 18px;">
+                        <a class="font-13" id="copy" ng-click="vm.copy()">
+                            <div>点击复制</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="username">
+                    <i class="icon iconfont icon-999999farenyingyezhizhaohao username-icon font-14"></i>
+                    <div class="username-name font-15">{{vm.model.username}}</div>
+                </div>
+            </div>
+            <div class="item item-image" style="border-width:0px">
+                <img ng-src="{{vm.model.imgAddr?vm.model.imgAddr:'app/platform/resources/img/default_user_portrait.gif'}}">
+                <qrcode version="5" error-correction-level="M" size="300" data="{{vm.model.code}}"></qrcode>
+            </div>
+            <p class="text-center label-home mtb10" style="margin-bottom: 15px;font-size: 13px;color: slategrey">扫一扫上面的二维码，让我们共享利益</p>
+        </div>
+    </ion-content>
+</ion-view>

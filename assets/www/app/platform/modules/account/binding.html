@@ -1,0 +1,56 @@
+<ion-view view-title="绑定账户" ng-show="!vm.showError" class="ionview_binding">
+    <div class="bar bar-header bar-positive top-trans">
+        <h1 class="title">绑定账户</h1>
+    </div>
+    <!--<ion-nav-bar class="bar-dblue">-->
+    <!--</ion-nav-bar>-->
+    <ion-content>
+        <div class="list binding-list-inset">
+            <div class="item item-avatar no-border" ng-show="vm.showPage">
+                <img ng-src="{{vm.wechatInfo.headImgUrl}}">
+                <h2 style="margin-top:10px;">{{vm.wechatInfo.nickname}}</h2>
+            </div>
+            <hr>
+            <div class="item item-icon-left item-icon-right no-border write">
+                <i class="icon ion-ios-person"></i>
+                <input type="text"
+                       placeholder="用户名"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.username">
+                <i class="icon ion-close-circled input-del-binding" style="padding-top: 3px;right: 20px;;font-size: 15px;" ng-click="vm.username=''"></i>
+            </div>
+            <hr>
+            <div class="item item-icon-left item-icon-right no-border write">
+                <i class="icon ion-android-lock"></i>
+                <input type="password"
+                       placeholder="密码"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.password">
+                <i class="icon ion-close-circled input-del-binding" style="padding-top: 3px;right: 20px;;font-size: 15px;" ng-click="vm.password=''"></i>
+            </div>
+        </div>
+        <div class="padding-top padding-horizontal" style="position: relative;top:40px">
+            <button class="button button-block button-dblue" ng-click="vm.bindAccount()">
+                立即绑定
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
+<div class="weui_msg" ng-if="vm.showError">
+    <div class="weui_icon_area"><i class="weui_icon_warn weui_icon_msg"></i></div>
+    <div class="weui_text_area">
+        <h2 class="weui_msg_title">微信认证超时</h2>
+        <p class="weui_msg_desc">请关闭此页面并重新访问</p>
+    </div>
+    <div class="weui_opr_area">
+        <p class="weui_btn_area">
+            <button class="weui_btn weui_btn_primary" ng-click="vm.close()">关闭</button>
+        </p>
+    </div>
+</div>

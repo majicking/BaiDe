@@ -1,0 +1,142 @@
+<style>
+    .width50 {
+        width: 50%;
+    }
+    .bgBlue {
+        background: #1b82d2;
+        color: #FFFFFF;
+        height: 40px;
+    }
+    .bgWhite {
+        background: #FFFFFF;
+        color: #1b82d2;
+        height: 40px;
+    }
+    .after_action{
+        color:#1b82d2;
+    }
+</style>
+<ion-header-bar hide-tabs="ture" id="s-header" cache-view="false" class="bar-dblue">
+    <div class="f-sb ion-header f-ac">
+        <div class="button button-clear icon iconfont icon-jiantou-left-copy visibility" style="left: 2px;" ng-click="vm.goBack()"></div>
+        <h1 class="title1-s"style="color: #fff;font-weight: normal">市场({{ vm.title }})</h1>
+        <div class="f-fe f-ac" style="margin-top: 4px;">
+            <span class="" style="color: #fff;font-weight: normal" ng-click="vm.otcTypebidding('tab.market-list')">竞价</span>
+        </div>
+    </div>
+</ion-header-bar>
+<div class="tabs-striped tabs-top tabs-color-{{vm.model.subAccountTypeText.split(':')[2]}}" style="height: 49px;margin-top:44px;text-align: center;position: relative;z-index: 6">
+    <div class="tabs f" style="top: 40px;position: static;">
+        <div style="margin:0 auto; position: relative">
+            <a class="after_action" style="position: relative" ng-click="vm.otcTypeChanged(0)">卖出</a>
+            <a class="after_action actived-s" style="position: relative" ng-click="vm.otcTypeChanged(1)">买入</a>
+            <div class="otcTab-bline dblue background-line"></div>
+        </div>
+    </div>
+    <!--<div class="tabs f" style="top: 40px;position: static;">
+        <div style="margin:0 auto; position: relative">
+            <a class="after_action" style="position: relative" ng-click="vm.otcTypeChanged(0)">卖出</a>
+            <a class="after_action actived-s" style="position: relative" ng-click="vm.otcTypeChanged(1)">买入</a>
+            <div class="otcTab-bline dblue background-line"></div>
+        </div>
+    </div>-->
+</div>
+<ion-content class="bg-color" style="margin-top: 49px">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="item-gap" style="background:#eceff1;min-height: 5px"></div>
+    <ul class="list" style="padding-bottom: 50px;">
+        <li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无数据</li>
+        <!--<li class="item-text-wrap mysells-list" ng-repeat='otcsell in vm.items' ui-sref="tab.market-detailnb({otcCurrentId:otcsell.id,subAccountType:vm.criteria.subAccountType})">-->
+        <li class="item-text-wrap mysells-list"  ng-repeat='otcnbsell in vm.items' ng-click="vm.goDetail('tab.market-detailnb',otcnbsell.id ,vm.criteria.otcType,vm.criteria.subAccountType)">
+            <div class="mysells-list__main">
+                <p class="mysells-list__odd">单号：{{ otcnbsell.sn }}</p>
+                <div class="mysells-list__line"></div>
+            </div>
+            <div class="f f-fs sells-list__mb">
+                <p class="mysells-list__price">单价：{{otcnbsell.sellOnePrice }}</p>
+                <p class="mysells-list__price">总价：{{otcnbsell.totalPrice }} 元</p>
+            </div>
+            <div class="f f-fs sells-list__mb">
+                <p class="mysells-list__price">数量：{{otcnbsell.sellAmount }}</p>
+            </div>
+            <div class="f f-sb f-ac sells-list__mb">
+                <p class="sells-list__time">{{otcnbsell.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+            </div>
+            <!--<p class="mysells-list__state" ng-class="vm.returnClass(otcnbsell.status_str)">{{otcnbsell.status_str }}</p>-->
+        </li>
+        <!--<li class="item-text-wrap mysells-list" ng-repeat='otcnbsell in vm.items' ng-click="vm.goDetail('tab.market-detailnb',otcnbsell.id ,vm.criteria.otcType,vm.criteria.subAccountType)">
+            <div class="mysells-list__main">
+                <h4 class="mysells-list__odd">单号：{{ otcnbsell.sn }}</h4>
+            </div>
+            <div class="f-sb">
+                <div class="f-dc">
+                    <p class="mysells-list__price">单价(元)</p>
+                    <p class="mysells-list__priceb account4-pic">
+                        {{ otcnbsell.sellOnePrice }}
+                    </p>
+                </div>
+                <div class="f-dc">
+                    <p class="mysells-list__price">总价(元)</p>
+                    <p class="mysells-list__priceb account4-pic">
+                        {{ otcnbsell.totalPrice }}
+                    </p>
+                </div>
+                <div class="f-dc">
+                    <p class="mysells-list__price">数量</p>
+                    <p class="mysells-list__priceb account4-pic">
+                        {{ otcnbsell.sellAmount }}
+                    </p>
+                </div>
+                <div class="f-ac f-c item-right__state">
+                    <span class="font-13">{{ otcnbsell.status_str }}</span>
+                </div>
+            </div>
+            <div class="f-fs">
+                <p class="sells-list__time">{{otcnbsell.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+            </div>
+
+        </li>-->
+    </ul>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="1%" ></ion-infinite-scroll>
+</ion-content>
+<div class="f f-sb payment-main">
+    <!--<div class="f f-c f-ac payment-btn payment-btnB {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}}" ng-click="goNativeBackParams('tab.account-transfer', {subAccountType:'0017', transferType:'ComeNdl'})">转账</div>-->
+    <div class="f-c f-a f-ac width50 bgWhite" ng-click="vm.otcTypebidding('tab.market-list')">竞价</div>
+    <div class="f-c f-a f-ac width50 bgBlue" ng-click="vm.otcTypebidding('tab.market-listnb')">非竞价</div>
+</div>
+<script>
+    //var atfacon=$(".after_action").offset().left;
+    var widthAt=$(".after_action").width();
+    $(".otcTab-bline").css({
+        "left":0,
+        "width":widthAt
+    });
+    $(".after_action").click(function () {
+        var widthThis=$(this).width();
+        var otcleft=$(".otcTab-bline").offset().left;
+        if(this.innerHTML=="买入"){
+            if(otcleft>widthThis){
+            }else {
+                $(this).toggleClass("actived-s");
+                $(this).siblings().toggleClass("actived-s")
+                $(".otcTab-bline").css({
+                    "left":widthThis+5
+                })
+            }
+        }else {
+            if(otcleft<widthThis){
+            }else {
+                $(this).toggleClass("actived-s");
+                $(this).siblings().toggleClass("actived-s")
+                $(".otcTab-bline").css({
+                    "left":0,
+                })
+            }
+        }
+
+    })
+</script>

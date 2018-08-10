@@ -1,0 +1,59 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="bar-dblue" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-click="goNativeBack('tab.manage')">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">银行卡</h1>
+    <div class="button button-clear iconfont ion-plus" style="position: absolute;right:10px;top:6px;font-size: 26px" ng-click="goNativeBackParams('tab.manage-bankcard-add',{ComeUrl:'tab.manage-bankcard-list'})">
+    </div>
+</ion-header-bar>
+<ion-content style="background-color: #eceff1;" ng-show="vm.showPage">
+    <ion-list>
+        <ion-item class="item item-sm text-center" ng-show="!vm.hasMoreData&&vm.items.length==0">暂未绑定银行卡</ion-item>
+        <div class="list card" ng-repeat="item in vm.items | filter:{used:1}">
+            <div class="item item-avatar-left" style="background-color: #4671b4;" ui-sref="tab.manage-bankcard({id:item.id})">
+                <img ng-src="app/platform/resources/img/bank/{{item.logoUrl}}" style="background-color:#fff">
+                <h2 style="font-size: 17px;color: rgba(255, 255, 255, 0.9);">{{item.bankName}}</h2>
+                <p style="font-size: 13px;color: rgba(255, 255, 255, 0.8);">{{item.nature}}</p>
+                <div style="position: absolute;top: 25px;right: 10%;font-size: 15px;color: rgba(255, 255, 255, 0.9);">
+                    <!--<i class="icon ion-ios-circle-outline light" ng-show="!item.used" ng-click="vm.useBankCard(item)"></i>-->
+                    <!--<i class="icon ion-ios-checkmark-outline light" ng-show="item.used"></i>-->
+                    <div>默认使用</div>
+                </div>
+                <div class="row" style="padding-left: 0px;padding-right: 0px">
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 0.5);font-size: 18px;letter-spacing:2px;">{{item.bankCard.split(' ')[0]}}</p>
+                    </div>
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 0.5);font-size: 18px;letter-spacing:2px;">{{item.bankCard.split(' ')[1]}}</p>
+                    </div>
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 0.5);font-size: 18px;letter-spacing:2px;">{{item.bankCard.split(' ')[2]}}</p>
+                    </div>
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 1);font-size: 18px;letter-spacing:2px;font-family: 'farrington-7b-qiqiregular'">{{item.bankCard.split(' ')[3]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list card" ng-repeat="item in vm.items | filter:{used:0}">
+            <div class="item item-avatar-left" style="background-color: #4671b4;" ui-sref="tab.manage-bankcard({id:item.id})">
+                <img ng-src="app/platform/resources/img/bank/{{item.logoUrl}}" style="background-color:#fff">
+                <h2 style="font-size: 17px;color: rgba(255, 255, 255, 0.9);">{{item.bankName}}</h2>
+                <p style="font-size: 13px;color: rgba(255, 255, 255, 0.8);">{{item.nature}}</p>
+                <div class="row" style="padding-left: 0px;padding-right: 0px">
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 0.5);font-size: 18px;letter-spacing:2px;">{{item.bankCard.split(' ')[0]}}</p>
+                    </div>
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 0.5);font-size: 18px;letter-spacing:2px;">{{item.bankCard.split(' ')[1]}}</p>
+                    </div>
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 0.5);font-size: 18px;letter-spacing:2px;">{{item.bankCard.split(' ')[2]}}</p>
+                    </div>
+                    <div class="col-25">
+                        <p style="color: rgba(255, 255, 255, 1);font-size: 18px;letter-spacing:2px;font-family: 'farrington-7b-qiqiregular'">{{item.bankCard.split(' ')[3]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-list>
+</ion-content>

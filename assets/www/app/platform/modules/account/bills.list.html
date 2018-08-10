@@ -1,0 +1,56 @@
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}" cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-if="vm.back!='account'" ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(':')[3], {subAccountType:vm.subAccountType})"></div>
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;" ng-if="vm.back='account'" ng-click="goNativeBack('tab.account')"></div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">财务记录</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:6px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBackParams(vm.model.subAccountTypeText.split(':')[3], {subAccountType:vm.subAccountType})">
+                <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}}" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">账&nbsp;&nbsp;&nbsp;&nbsp;户</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}">
+    <ion-refresher on-refresh="vm.doRefresh()"
+                   pulling-text="下拉刷新"
+                   refreshing-text="刷新中..."
+                   refreshing-icon="ion-loading-b">
+    </ion-refresher>
+    <div class="content-detail">
+        <ul>
+            <li class="item item-sm text-center" ng-show="!vm.hasData&&vm.items.length==0">暂无财务记录</li>
+            <li ng-repeat='item in vm.items'>
+                <p class="list-detail f-sb">
+                    <span class="fl bold" style="font-size: 16px;font-weight: 600;width:65%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.note}}</span>
+                    <span class="fr bold" style="position: relative;top: -2px;font-size: 17px;font-weight: 600">{{item.cashAmountStr}}</span>
+                </p>
+                <p class="list-detail f-sb" style="font-size:0.9rem;">
+                    <span class="fl grey">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="fr grey">{{item.amountStr}}</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <ion-infinite-scroll ng-if="vm.hasMoreData" on-infinite="vm.loadMore()" spinner="lines" distance="1%" ></ion-infinite-scroll>
+</ion-content>

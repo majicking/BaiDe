@@ -1,0 +1,208 @@
+<style>
+    .item-select select {
+        top:0;
+        height: 49px;
+    }
+    .item-select {
+        height: 48px;
+    }
+</style>
+<ion-header-bar hide-tabs="true" id="s-header" class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[0]}}"
+                cache-view="false">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="left: 2px;"
+         ng-click="goNativeBackParams(vm.comeUrl,{subAccountType:vm.subAccountType})">
+    </div>
+    <h1 class="title1" style="color: #fff;font-weight: normal">{{vm.model.subAccountTypeText.split(':')[0]}}</h1>
+    <div class="button button-clear" style="position: absolute;right:10px;top:9px" ng-click="moreToggle()">
+        <i class="iconfont {{vm.model.subAccountTypeText.split(':')[1]}} header-bar--iconfont"></i>
+    </div>
+    <span class="more-hide-arrow" ng-show="visible"></span>
+    <div class="more-hide" ng-show="visible">
+        <ul>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account')">
+                <i class="iconfont icon-58-copy" style="color: #fff;font-size: 16px;"></i>
+                <label style="font-size: 15px">首&nbsp;&nbsp;&nbsp;&nbsp;页</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.notice-list')">
+                <i class="iconfont icon-wodexiaoxi2" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">消&nbsp;&nbsp;&nbsp;&nbsp;息</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.account-qrcode')">
+                <i class="iconfont icon-erweima1" style="color: #fff;font-size: 14px;"></i>
+                <label style="font-size: 15px">邀请码</label>
+            </li>
+            <li class="button button-clear" ng-click="goNativeBack('tab.manage')">
+                <i class="iconfont icon-user" style="color: #fff;font-size: 17px;"></i>
+                <label style="font-size: 15px">我&nbsp;&nbsp;&nbsp;&nbsp;的</label>
+            </li>
+        </ul>
+    </div>
+</ion-header-bar>
+<div class="tabs-striped tabs-top tabs-color-{{vm.model.subAccountTypeText.split(':')[2]}}"
+     style="height: 49px;margin-top:44px;text-align: center;position: relative;z-index: 6">
+    <div class="tabs" style="top: 40px;position: static;">
+        <div style="margin:0 auto; position: relative">
+            <a class="after_action {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}}"
+               style="position: relative" ng-click="vm.otcTypeChanged(0)">卖出</a>
+            <a class="after_action actived-s {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}}"
+               style="position: relative" ng-click="vm.otcTypeChanged(1)">买入</a>
+            <div class="otcTab-bline {{vm.model.subAccountTypeText.split(':')[2].split(',')[0]}} background-line"></div>
+        </div>
+        <!--<a class="tab-item text-grey fr" ng-class="{'text-{{vm.model.subAccountTypeText.split(':')[2]}} active':vm.input.otcType == otcType.value}" ng-click="vm.otcTypeChanged(otcType.value)" ng-repeat="otcType in vm.otcTypes" >{{otcType.text}}</a>-->
+    </div>
+</div>
+<ion-content class="{{vm.model.subAccountTypeText.split(':')[4].split(',')[1]}}" style="margin-top: 49px">
+    <div class="item-gap" ng-show="vm.input.createUser == vm.input.currentUser && vm.input.otcType == 0"></div>
+    <div class="list">
+        <div class="item item-icon-left item-icon-right" style="border:none"
+             ng-show="vm.input.createUser == vm.input.currentUser && vm.input.otcType == 0">
+            <i class="icon iconfont icon-caiwuguanli {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont--color list-iconfont font-25"></i>
+            <label class="font-17">可用NDL账户</label>
+            <i class="icon ion-chevron-right icon-accessory" style="width: 50px;padding-left: 18px;color: #fff">
+                <!--<div class="tags-price" style="">
+                    <span class="jia_ge_die" ng-if="vm.model.upDown=='0'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_zhang" ng-if="vm.model.upDown=='1'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_gain" ng-if="vm.model.upDown=='2'">{{vm.model.rate}}%</span>
+                </div>-->
+                <div class="item-note-price font-17">{{vm.model.consumeAccount|number:2}}</div>
+            </i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-icon-left item-icon-right" style="border:none">
+            <i class="icon iconfont icon-touzi1 {{vm.model.subAccountTypeText.split(':')[2]}}-iconfont--color list-iconfont font-25"></i>
+            <label class="font-17">市场价格</label>
+            <i class="icon ion-chevron-right icon-accessory" style="width: 50px;padding-left: 18px;color: #fff">
+                <!--<div class="tags-price" style="">
+                    <span class="jia_ge_die" ng-if="vm.model.upDown=='0'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_zhang" ng-if="vm.model.upDown=='1'">{{vm.model.rate}}%</span>
+                    <span class="jia_ge_gain" ng-if="vm.model.upDown=='2'">{{vm.model.rate}}%</span>
+                </div>-->
+                <div class="item-note-price font-17">{{vm.model.market|number:2}}</div>
+            </i>
+        </div>
+        <div class="item-gap" ng-show="vm.input.otcType=='0' && vm.input.otcType=='1'"></div>
+        <div class="item item-avatar-left withdraw" ng-show="vm.input.otcType=='0' && vm.input.otcType=='1'"
+             style="border: none">
+            <img ng-src="app/platform/resources/img/bank/{{vm.bankInfo.logoUrl}}">
+            <h2 style="font-size: 17px;color: #444">{{vm.bankInfo.bankName}}</h2>
+            <p style="font-size: 13px;">{{vm.bankInfo.nature}} | {{vm.bankInfo.bankCard}}</p>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item f-sb" style="border: none">
+            <label style="font-size: 16px">总价</label>
+            <div class="item-note-orange">{{vm.input.totalPrice}}</div>
+        </div>
+        <div class="item-gap"></div>
+
+        <label class="item item-input item-select" style="border: none">
+            <div class="input-label" style="font-weight: normal">竞价/非竞价</div>
+            <select ng-model="vm.model.selectBidding" ng-change="vm.selectBidding(vm.model.selectBidding)"
+                    style="border-bottom: .5px solid #ddd">
+                <option value=""ng-selected="selectBidding.id==''">请选择</option>
+                <option value="1" ng-selected="selectBidding.id=='1'">竞价</option>
+                <option value="2" ng-selected="selectBidding.id=='2'">非竞价</option>
+            </select>
+        </label>
+
+        <div class="item-gap" ng-show="vm.input.otcType=='1'"></div>
+
+        <div class="item item-input item-stacked-label withdraw write" style="border: none"
+             ng-show="vm.input.otcType=='1'">
+            <span class="input-label withdraw" style="font-weight: normal;width:auto ">单价</span>
+            <input type="number"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.sellOnePrice"
+                   ng-change="vm.updateTotalPrice()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入单价">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px"
+               ng-click="vm.input.sellOnePrice=null;vm.updateTotalPrice()"></i>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write" style="border: none">
+            <span class="input-label withdraw" style="font-weight: normal;">{{vm.pageContent.amountStr}}</span>
+            <input type="number"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.sellAmount"
+                   ng-change="vm.updateTotalPrice()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="操作最低数量为 {{vm.input.tradeLimit| number:2}}"
+                   ng-if="vm.input.tradeLimit != null && vm.input.tradeLimit != '0'">
+            <input type="text"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.sellAmount"
+                   ng-change="vm.updateTotalPrice()"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入{{vm.pageContent.amountStr}}"
+                   ng-if="vm.input.tradeLimit == null && vm.input.tradeLimit == '0'">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px"
+               ng-click="vm.input.sellAmount=null;vm.updateTotalPrice()"></i>
+            <div class="item-note-dblue font-14" style="position:absolute;padding-top: 7px;right: 16px"
+                 ng-if="vm.input.otcType =='0'" ng-click="vm.allEntry()">有效额度
+            </div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="item item-input item-stacked-label withdraw write" style="border: none">
+            <span class="input-label withdraw" style="font-weight: normal;">交易密码</span>
+            <input type="password"
+                   style="float: left;width: 70%"
+                   ng-model="vm.input.payPassword"
+                   ng-keyup="writeClear($event, 'write')"
+                   ng-focus="writeClear($event, 'write')"
+                   ng-blur="writeBlur($event, 'write')"
+                   placeholder="请输入交易密码">
+            <i class="icon ion-close-circled input-del-transfer" style="padding-top: 8px"
+               ng-click="vm.input.payPassword=''"></i>
+        </div>
+    </div>
+    <div style="text-align: left; margin-left: 10px; margin-top: 10px;font-size: 13px;color: #96ABBB;"
+         ng-show="vm.input.tradeCount != null&&vm.input.tradeCount != 0">
+        每天买卖操作不得大于 {{vm.input.tradeCount}} 次
+    </div>
+    <div class="padding-horizontal">
+        <button class="button button-block {{vm.model.subAccountTypeText.split(':')[4].split(',')[3]}}"
+                ng-disabled="vm.disabled" ng-click="vm.confirm()">
+            确认{{vm.pageContent.otcStr}}
+        </button>
+    </div>
+</ion-content>
+<script>
+    var widthAt = $(".after_action").width();
+    $(".otcTab-bline").css({
+        "left": 0,
+        "width": widthAt
+    });
+    $(".after_action").click(function () {
+        var widthThis = $(this).width();
+        var otcleft = $(".otcTab-bline").offset().left;
+        if (otcleft > widthThis) {
+
+        }
+        if (this.innerHTML == "买入") {
+            if (otcleft > widthThis) {
+            } else {
+                $(this).toggleClass("actived-s");
+                $(this).siblings().toggleClass("actived-s")
+                $(".otcTab-bline").css({
+                    "left": widthThis + 5
+                })
+            }
+        } else {
+            if (otcleft < widthThis) {
+            } else {
+                $(this).toggleClass("actived-s");
+                $(this).siblings().toggleClass("actived-s")
+                $(".otcTab-bline").css({
+                    "left": 0,
+                })
+            }
+        }
+
+    })
+</script>

@@ -1,0 +1,79 @@
+<ion-view view-title="忘记密码" cache-view="false" class="ionview_fogot">
+    <div class="button button-clear icon iconfont icon-jiantou-left-copy" style="z-index:99999;top:3px;" ng-click="goNativeBackParams('login', {loginType:'right'})">
+    </div>
+    <div class="bar bar-header bar-positive top-trans">
+        <h1 class="title">忘记密码</h1>
+    </div>
+    <ion-content>
+        <div class="list fogot-list-inset">
+            <div class="item item-icon-left item-icon-right no-border write">
+                <i class="icon ion-ios-person" style="color:#666;"></i>
+                <input type="text"
+                       placeholder="用户名"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.username">
+                <i class="icon ion-close-circled input-del-forgot" style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.username=''"></i>
+            </div>
+            <hr>
+            <div class="item item-icon-left item-button-right item-icon-right no-border write">
+                <i class="icon iconfont icon-yanzhengma" style="font-size: 29px;color:#666;"></i>
+                <input type="text"
+                       placeholder="验证码"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.code">
+                <img ng-src="{{vm.codeUrl}}" ng-click="vm.getCode()" style="position: absolute;top: 8px;right: 16px;z-index: 99;">
+                <button class="button button-dgreen button-small" style="position: absolute;top: 8px;right: 16px;background: #fff;width: 0px;height: 0px"></button>
+                <i class="icon ion-close-circled input-del-forgot" style="position:absolute;padding-top: 3px; right: 95px;font-size: 15px;" ng-click="vm.code=''"></i>
+            </div>
+            <hr>
+            <div class="item item-icon-left item-button-right item-icon-right no-border write">
+                <i class="icon fa fa-mobile" style="color:#666;font-size: 36px;"></i>
+                <input type="tel"
+                       placeholder="手机号"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.phone">
+                <button class="button button-dgreen button-small" style="position: absolute;top: 6px;right: 16px;font-size: 13px;" ng-click="vm.getCaptcha(true)" ng-disabled="vm.captchaBtn.disabled">{{vm.captchaBtn.label}}</button>
+                <i class="icon ion-close-circled input-del-forgot" style="position:absolute;padding-top: 3px; right: 95px;font-size: 15px;" ng-click="vm.phone=''"></i>
+            </div>
+            <hr>
+            <div class="item item-icon-left item-icon-right no-border write">
+                <i class="icon ion-ios-email" style="color:#666;"></i>
+                <input type="number"
+                       placeholder="动态码"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.captcha">
+                <i class="icon ion-close-circled input-del-forgot" style="position:absolute;padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.captcha=''"></i>
+            </div>
+            <hr>
+            <div class="item item-icon-left item-icon-right no-border write">
+                <i class="icon ion-android-lock" style="color:#666;font-size: 29px;"></i>
+                <input type="password"
+                       placeholder="新密码"
+                       style="width: 100%"
+                       ng-keyup="writeClear($event, 'write')"
+                       ng-focus="writeClear($event, 'write')"
+                       ng-blur="writeBlur($event, 'write')"
+                       ng-model="vm.password">
+                <i class="icon ion-close-circled input-del-forgot" style="padding-top: 3px;right: 20px;font-size: 15px;" ng-click="vm.password=''"></i>
+            </div>
+        </div>
+        <div class="padding" style="padding-bottom:0px; font-size: 10px;color: #fff;position: relative;top:40px">
+            密码要求长度在6-22位字符之间，至少包含数字、字母(区分大小写)、符号(!#$%^&*.~)中的2种
+        </div>
+        <div class="padding padding-horizontal" style="position: relative;top:38px">
+            <button class="button button-block button-dgreen" ng-click="vm.forgot()">
+                修改密码
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

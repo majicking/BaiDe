@@ -1,0 +1,20 @@
+<ion-view hide-tabs="true" view-title="消息">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.notice-list')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color" ng-show="vm.showPage">
+        <div class="list">
+            <div class="item item-body" ng-if="vm.model">
+                <span class="title_detail">{{vm.model.title}}</span>
+                <p class="tags" style="position:absolute; left:0;margin-top: 15px;">
+                    <span class="date_detail"><em translate="detail.date_detail">发布于</em> {{vm.model.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+                </p>
+                <p style="margin-top: 50px;">
+                    <span ng-bind-html="vm.model.content"></span>
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

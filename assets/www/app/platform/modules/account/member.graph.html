@@ -1,0 +1,369 @@
+<style>
+    .ion-ios-star{
+        color: transparent !important;
+        display: none !important;
+    }
+    div.orgChart div.node{
+        height: 80px !important;
+    }
+    .orgChart .member-title{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: inline-block;
+    }
+    div.orgChart h2{
+        margin-top: 7px !important;
+    }
+</style>
+<ion-view hide-tabs="true" view-title="报单中心">
+    <ion-nav-bar class="bar-calm bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon-sm button-clear icon-left ion-ios-arrow-back" ng-click="goNativeBack('tab.manage')"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color" ng-show="vm.showPage">
+        <style>
+            div.orgChart {
+                border: 0px !important;
+                background-color: #eceff1;
+                margin: 10px;
+                padding: 20px;
+                height: 100%;
+            }
+
+            div.orgChart div.node {
+                width: 77px;
+                height: 90px;
+            }
+
+            div.orgChart div.node.level0 {
+                background-color: #ffff98;
+            }
+
+            div.orgChart div.node.level1 {
+                background-color: #ffffcf;
+            }
+
+            div.orgChart div.node.level2 {
+                background-color: #ffffcf;
+            }
+            .line{
+                border-top: none;
+            }
+            div.orgChart div.node.level1 > h2{
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            div.orgChart {
+                 padding: 0 !important;
+                margin-bottom: 30px !important;
+                height: 100%;
+                box-sizing: border-box;
+            }
+        </style>
+        <div style="width: 100%;" class="text-center padding-top">会员系谱</div>
+        <div id="main">
+            <div class="orgChart">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                    <tr class="nodes">
+                        <td class="node" colspan="4">
+                            <div class="node level0 node0 level0-node0 hasChildren shownChildren">
+                                <h2>
+                                    <em class="member-title" ng-if="vm.tree.member!=null">{{vm.tree.member.username}}</em>
+                                    <em ng-if="vm.tree.member==null" >空区</em>
+                                    <br>
+                                    <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35" style="position: relative;"
+                                       ng-class="{'positive':vm.tree.member!=null&&vm.tree.member.state=='04','balanced':vm.tree.member!=null&&vm.tree.member.state=='02','assertive':vm.tree.member!=null&&vm.tree.member.state=='00'}"></i>
+                                    <br>
+                                    <div style="position: relative;" ng-if="vm.tree.member!=null&&vm.tree.member.state=='04'">
+                                        <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.member.levelList track by $index'></i>
+                                    </div>
+                                    <div style="position: relative;" ng-if="vm.tree.member!=null&&vm.tree.member.state=='02'">
+                                        <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.member.levelList track by $index'></i>
+                                    </div>
+                                    <div style="position: relative;" ng-if="vm.tree.member!=null&&vm.tree.member.state=='00'">
+                                        <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                    </div>
+                                    <div style="position: relative;" ng-if="vm.tree.member==null">
+                                        <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                    </div>
+                                </h2>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="lines">
+                        <td colspan="4">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody>
+                                <tr class="lines x">
+                                    <td class="line left lineColorNone"></td>
+                                    <td class="line right lineColorNone"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="lines v">
+                        <td class="line left lineColorNone"></td>
+                        <td class="line right top lineColorNone"></td>
+                        <td class="line left top lineColorNone"></td>
+                        <td class="line right lineColorNone"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody>
+                                <tr class="nodes">
+                                    <td class="node" colspan="4" ng-click="vm.clickNode(vm.tree.member,vm.tree.left.member,'left',vm.tree.activeBalanceSessionToken,vm.tree.dbCheckCode,vm.tree.ndlCheckCode)">
+                                        <div class="node level1 node0 level1-node0 hasChildren shownChildren">
+                                            <h2>
+                                                <em class="member-title" ng-if="vm.tree.left.member!=null">{{vm.tree.left.member.username}}</em>
+                                                <em ng-if="vm.tree.left.member==null">空区</em>
+                                                <br>
+                                                <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35"
+                                                   ng-class="{'positive':vm.tree.left.member!=null&&vm.tree.left.member.state=='04','balanced':vm.tree.left.member!=null&&vm.tree.left.member.state=='02','assertive':vm.tree.left.member!=null&&vm.tree.left.member.state=='00'}"></i>
+                                                <br>
+                                                <div style="position: relative;" ng-if="vm.tree.left.member!=null&&vm.tree.left.member.state=='04'">
+                                                    <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.left.member.levelList track by $index'></i>
+                                                </div>
+                                                <div style="position: relative;" ng-if="vm.tree.left.member!=null&&vm.tree.left.member.state=='02'">
+                                                    <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.left.member.levelList track by $index'></i>
+                                                </div>
+                                                <div style="position: relative;" ng-if="vm.tree.left.member!=null&&vm.tree.left.member.state=='00'">
+                                                    <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                                </div>
+                                                <div style="position: relative;" ng-if="vm.tree.left.member==null">
+                                                    <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                                </div>
+                                            </h2>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="lines">
+                                    <td colspan="4">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr class="lines x">
+                                                <td class="line left lineColorNone"></td>
+                                                <td class="line right lineColorNone"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class="lines v">
+                                    <td class="line left lineColorNone"></td>
+                                    <td class="line right top lineColorNone"></td>
+                                    <td class="line left top lineColorNone"></td>
+                                    <td class="line right lineColorNone"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr class="nodes">
+                                                <td class="node" colspan="2" ng-click="vm.clickNode(vm.tree.left.member,vm.tree.left.left.member,'left',vm.tree.activeBalanceSessionToken,vm.tree.dbCheckCode,vm.tree.ndlCheckCode)">
+                                                    <div class="node level2 node0 level2-node0">
+                                                        <h2>
+                                                            <em class="member-title" ng-if="vm.tree.left.left.member!=null">{{vm.tree.left.left.member.username}}</em>
+                                                            <em ng-if="vm.tree.left.left.member==null">空区</em><br>
+                                                            <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35"
+                                                               ng-class="{'positive':vm.tree.left.left.member!=null&&vm.tree.left.left.member.state=='04','balanced':vm.tree.left.left.member!=null&&vm.tree.left.left.member.state=='02','assertive':vm.tree.left.left.member!=null&&vm.tree.left.left.member.state=='00'}"></i>
+                                                            <br>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.left.member!=null&&vm.tree.left.left.member.state=='04'">
+                                                                <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.left.left.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.left.member!=null&&vm.tree.left.left.member.state=='02'">
+                                                                <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.left.left.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.left.member!=null&&vm.tree.left.left.member.state=='00'">
+                                                                <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.left.member==null">
+                                                                <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                                            </div>
+                                                        </h2>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td colspan="2">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr class="nodes">
+                                                <td class="node" colspan="2" ng-click="vm.clickNode(vm.tree.left.member,vm.tree.left.right.member,'right',vm.tree.activeBalanceSessionToken,vm.tree.dbCheckCode,vm.tree.ndlCheckCode)">
+                                                    <div class="node level2 node1 level2-node1">
+                                                        <h2>
+                                                            <em class="member-title" ng-if="vm.tree.left.right.member!=null">{{vm.tree.left.right.member.username}}</em>
+                                                            <em ng-if="vm.tree.left.right.member==null">空区</em>
+                                                            <br>
+                                                            <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35"
+                                                               ng-class="{'positive':vm.tree.left.right.member!=null&&vm.tree.left.right.member.state=='04','balanced':vm.tree.left.right.member!=null&&vm.tree.left.right.member.state=='02','assertive':vm.tree.left.right.member!=null&&vm.tree.left.right.member.state=='00'}"></i>
+                                                            <br>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.right.member!=null&&vm.tree.left.right.member.state=='04'">
+                                                                <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.left.right.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.right.member!=null&&vm.tree.left.right.member.state=='02'">
+                                                                <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.left.right.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.right.member!=null&&vm.tree.left.right.member.state=='00'">
+                                                                <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.left.right.member==null">
+                                                                <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                                            </div>
+                                                        </h2>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td colspan="2">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody>
+                                <tr class="nodes">
+                                    <td class="node" colspan="4" ng-click="vm.clickNode(vm.tree.member,vm.tree.right.member,'right',vm.tree.activeBalanceSessionToken,vm.tree.dbCheckCode,vm.tree.ndlCheckCode)">
+                                        <div class="node level1 node1 level1-node1 hasChildren shownChildren">
+                                            <h2>
+                                                <em class="member-title" ng-if="vm.tree.right.member!=null">{{vm.tree.right.member.username}}</em>
+                                                <em ng-if="vm.tree.right.member==null">空区</em>
+                                                <br>
+                                                <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35"
+                                                   ng-class="{'positive':vm.tree.right.member!=null&&vm.tree.right.member.state=='04','balanced':vm.tree.right.member!=null&&vm.tree.right.member.state=='02','assertive':vm.tree.right.member!=null&&vm.tree.right.member.state=='00'}"></i>
+                                                <br>
+                                                <div style="position: relative;" ng-if="vm.tree.right.member!=null&&vm.tree.right.member.state=='04'">
+                                                    <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.right.member.levelList track by $index'></i>
+                                                </div>
+                                                <div style="position: relative;" ng-if="vm.tree.right.member!=null&&vm.tree.right.member.state=='02'">
+                                                    <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.right.member.levelList track by $index'></i>
+                                                </div>
+                                                <div style="position: relative;" ng-if="vm.tree.right.member!=null&&vm.tree.right.member.state=='00'">
+                                                    <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                                </div>
+                                                <div style="position: relative;" ng-if="vm.tree.right.member==null">
+                                                    <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                                </div>
+                                            </h2>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="lines">
+                                    <td colspan="4">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr class="lines x">
+                                                <td class="line left lineColorNone"></td>
+                                                <td class="line right lineColorNone"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class="lines v">
+                                    <td class="line left lineColorNone"></td>
+                                    <td class="line right top lineColorNone"></td>
+                                    <td class="line left top lineColorNone"></td>
+                                    <td class="line right lineColorNone"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr class="nodes">
+                                                <td class="node" colspan="2" ng-click="vm.clickNode(vm.tree.right.member,vm.tree.right.left.member,'left',vm.tree.activeBalanceSessionToken,vm.tree.dbCheckCode,vm.tree.ndlCheckCode)">
+                                                    <div class="node level2 node0 level2-node0">
+                                                        <h2>
+                                                            <em class="member-title" ng-if="vm.tree.right.left.member!=null">{{vm.tree.right.left.member.username}}</em>
+                                                            <em ng-if="vm.tree.right.left.member==null">空区</em>
+                                                            <br>
+                                                            <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35"
+                                                               ng-class="{'positive':vm.tree.right.left.member!=null&&vm.tree.right.left.member.state=='04','balanced':vm.tree.right.left.member!=null&&vm.tree.right.left.member.state=='02','assertive':vm.tree.right.left.member!=null&&vm.tree.right.left.member.state=='00'}"></i>
+                                                            <br>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.left.member!=null&&vm.tree.right.left.member.state=='04'">
+                                                                <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.right.left.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.left.member!=null&&vm.tree.right.left.member.state=='02'">
+                                                                <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.right.left.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.left.member!=null&&vm.tree.right.left.member.state=='00'">
+                                                                <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.left.member==null">
+                                                                <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                                            </div>
+                                                        </h2>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td colspan="2">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                            <tr class="nodes">
+                                                <td class="node" colspan="2" ng-click="vm.clickNode(vm.tree.right.member,vm.tree.right.right.member,'right',vm.tree.activeBalanceSessionToken,vm.tree.dbCheckCode,vm.tree.ndlCheckCode)">
+                                                    <div class="node level2 node1 level2-node1">
+                                                        <h2>
+                                                            <em class="member-title" ng-if="vm.tree.right.right.member!=null">{{vm.tree.right.right.member.username}}</em>
+                                                            <em ng-if="vm.tree.right.right.member==null">空区</em>
+                                                            <br>
+                                                            <i class="icon iconfont icon-gerenzhongxinxinxichakantiyanbiaoxinxi-copy font-35"
+                                                               ng-class="{'positive':vm.tree.right.right.member!=null&&vm.tree.right.right.member.state=='04','balanced':vm.tree.right.right.member!=null&&vm.tree.right.right.member.state=='02','assertive':vm.tree.right.right.member!=null&&vm.tree.right.right.member.state=='00'}"></i>
+                                                            <br>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.right.member!=null&&vm.tree.right.right.member.state=='04'">
+                                                                <i class="icon ion-ios-star positive" style="font-size: 8px;" ng-repeat='level in vm.tree.right.right.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.right.member!=null&&vm.tree.right.right.member.state=='02'">
+                                                                <i class="icon ion-ios-star balanced" style="font-size: 8px;" ng-repeat='level in vm.tree.right.right.member.levelList track by $index'></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.right.member!=null&&vm.tree.right.right.member.state=='00'">
+                                                                <i class="icon ion-ios-star assertive" style="font-size: 8px;"></i>
+                                                            </div>
+                                                            <div style="position: relative;" ng-if="vm.tree.right.right.member==null">
+                                                                <i class="icon ion-ios-star" style="font-size: 8px;color: #ffff98"></i>
+                                                            </div>
+                                                        </h2>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="inquire_vessel">
+            <div class="list list-inset show_numberInput">
+                <!--<label class="item item-input">-->
+                    <i class="icon ion-search placeholder-icon search_number"></i>
+                    <input class="input_numberSearch" type="text" placeholder="编号" ng-model="vm.criteria.username">
+                <!--</label>-->
+            </div>
+            <div class="padding-horizontal">
+                <button class="button button-block button-dblue" ng-click="vm.search()">
+                    查询
+                </button>
+            </div>
+            <div class="padding-horizontal">
+                <button class="button button-block button-dblue" ng-disabled="vm.stack.length<2" ng-click="vm.goBack()">
+                    上一级
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

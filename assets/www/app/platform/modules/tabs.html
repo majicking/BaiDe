@@ -1,0 +1,17 @@
+<ion-tabs class="tabs-icon-top tabs-color-active-dblue" ng-class="{'tabs-item-hide': $root.hideTabs}">
+    <ion-tab title="首页" icon-on="icon iconfont icon-icon-home2" icon-off="icon iconfont icon-icon-home" ui-sref="tab.account">
+        <ion-nav-view name="tab-account"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="消息" icon-on="icon iconfont icon-xiaoxi12" icon-off="icon iconfont icon-xiaoxi14" ui-sref="tab.notice-list">
+        <ion-nav-view name="tab-notice"></ion-nav-view>
+    </ion-tab>
+    <!--<ion-tab title="算力" icon-on="icon iconfont icon-shujushixin" icon-off="icon iconfont icon-shujukongxin" ui-sref="tab.product">-->
+        <!--<ion-nav-view name="tab-product"></ion-nav-view>-->
+    <!--</ion-tab>-->
+    <ion-tab title="市场" icon-on="icon iconfont icon-shichang" icon-off="icon iconfont icon-shichangfuwue" ui-sref="tab.market-list">
+        <ion-nav-view name="tab-market"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="我的" icon-on="icon iconfont icon-wode-active" icon-off="icon iconfont icon-wode3" ui-sref="tab.manage">
+        <ion-nav-view name="tab-manage"></ion-nav-view>
+    </ion-tab>
+</ion-tabs>

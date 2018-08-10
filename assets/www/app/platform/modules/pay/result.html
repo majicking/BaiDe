@@ -1,0 +1,21 @@
+<ion-view view-title="支付详情" hide-tabs="true" cache-view="false">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="right">
+            <button class="button button-icon-sm button-clear" ng-click="goNativeBack('tab.manage')">完成</button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color">
+        <div class="weui_msg" ng-if="!vm.showLoading">
+            <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+            <div class="weui_text_area">
+                <h2 class="weui_msg_title">支付成功</h2>
+                <!--<p class="weui_msg_desc">请关闭此页面并重新访问</p>-->
+            </div>
+            <!--<div class="weui_opr_area">-->
+                <!--<p class="weui_btn_area">-->
+                    <!--<button class="weui_btn weui_btn_primary" ng-click="vm.close()">关闭</button>-->
+                <!--</p>-->
+            <!--</div>-->
+        </div>
+    </ion-content>
+</ion-view>

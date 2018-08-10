@@ -1,0 +1,31 @@
+<ion-view hide-tabs="true" view-title="银行卡">
+    <ion-nav-bar class="bar-dblue">
+        <ion-nav-buttons side="left">
+            <button class="button button-clear icon iconfont icon-jiantou-left-copy" ng-click="goNativeBack('tab.manage-bankcard-list')"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-clear" style="font-size: 15px" ng-click="vm.showActionSheet()">管理</button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg-color" ng-show="vm.showPage">
+        <div class="list">
+            <div class="item item-avatar-left" style="background-color: #4671b4;">
+                <img ng-src="app/platform/resources/img/bank/{{vm.model.logoUrl}}" style="background-color:#fff">
+                <h2 style="font-size: 17px;color: rgba(255, 255, 255, 0.9);">{{vm.model.bankName}}</h2>
+                <p style="font-size: 13px;color: rgba(255, 255, 255, 0.8);">{{vm.model.nature}} | 尾号{{vm.model.bankCard}}</p>
+            </div>
+            <div class="item item-divider">银行信息</div>
+            <div class="item">
+                <label>银行网点</label>
+                <div class="item-note">{{vm.model.branchName}}</div>
+            </div>
+            <div class="item">
+                <label>服务热线</label>
+                <div class="item-note">{{vm.model.kefu}}</div>
+            </div>
+        </div>
+        <!--<div class="padding">-->
+            <!--<button class="button button-block button-blue" ng-click="vm.addBankCard()">保存并使用</button>-->
+        <!--</div>-->
+    </ion-content>
+</ion-view>
